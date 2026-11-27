@@ -3,10 +3,6 @@
 </div>
 
 <p align="center">
-  <a href="https://zhy031214.github.io/zhy031214/" target="_blank"><img src="./assets/button-site.svg" height="40" alt="进入完整学院蓝主页" /></a>
-</p>
-
-<p align="center">
   <a href="#about">About</a> &nbsp;·&nbsp;
   <a href="#projects">Projects</a> &nbsp;·&nbsp;
   <a href="#ai">AI</a> &nbsp;·&nbsp;
