@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" fill="none" role="img" aria-labelledby="bannerTitle bannerDesc">
+  <title id="bannerTitle">Aaron Zhang — Business Analytics</title>
+  <desc id="bannerDesc">Academy blue banner with gold details and subtle animated particles.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="340" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#06152E"/>
+      <stop offset="0.55" stop-color="#0A2348"/>
+      <stop offset="1" stop-color="#0E2E5C"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#D6C08A"/>
+      <stop offset="0.55" stop-color="#B08D57"/>
+      <stop offset="1" stop-color="#8C6D3F"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" stroke="#B08D57" stroke-opacity="0.055" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="340" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#06152E" stop-opacity="0"/>
+      <stop offset="1" stop-color="#06152E" stop-opacity="0.45"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="340" rx="16" fill="url(#bg)"/>
+  <rect width="1200" height="340" rx="16" fill="url(#grid)"/>
+  <rect width="1200" height="340" rx="16" fill="url(#fade)"/>
+  <rect x="0.5" y="0.5" width="1199" height="339" rx="15.5" stroke="#1E3A5F"/>
+  <rect x="12" y="12" width="1176" height="316" rx="10" stroke="#B08D57" stroke-opacity="0.32"/>
+  <path d="M12 34V12H34M1166 12H1188V34M1188 306V328H1166M34 328H12V306" stroke="#B08D57" stroke-width="1.4" stroke-opacity="0.8"/>
+
+  <text x="64" y="60" fill="#B08D57" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="3">AARON ZHANG / 2026</text>
+  <path d="M64 74H220" stroke="url(#gold)" stroke-width="1.2"/>
+
+  <text x="62" y="146" fill="#F5F7FA" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="64" font-weight="500" letter-spacing="-1">Aaron Zhang</text>
+  <text x="64" y="178" fill="#9FB8D6" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="400" letter-spacing="1.2">张宏扬 · Hongyang Zhang</text>
+
+  <text x="64" y="216" fill="#C9B07A" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18" font-weight="500" letter-spacing="0.3">Business Analytics · Data · Decisions</text>
+  <text x="64" y="244" fill="#B8CBE2" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14" font-weight="400">把业务问题，拆成可检验的数据问题。</text>
+
+  <text x="64" y="296" fill="#7FA6C9" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10" font-weight="500" letter-spacing="2.2">SHANGHAI · INFORMATION SYSTEMS · 2027</text>
+
+  <path d="M720 54V286" stroke="#1E3A5F"/>
+  <path d="M720 54V286" stroke="#B08D57" stroke-opacity="0.25" stroke-dasharray="2 8"/>
+
+  <g>
+    <rect x="780" y="52" width="360" height="236" rx="6" fill="#081B38" stroke="#B08D57" stroke-opacity="0.35"/>
+    <text x="804" y="80" fill="#B08D57" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="9" font-weight="600" letter-spacing="2.2">ACADEMY / ANALYTICS</text>
+    <text x="1116" y="80" text-anchor="end" fill="#7FA6C9" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="9" letter-spacing="1.6">01 — 03</text>
+    <path d="M804 94H1116" stroke="#1E3A5F"/>
+
+    <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+      <text x="804" y="126" fill="#7FA6C9" font-size="9" font-weight="600" letter-spacing="2">DATA</text>
+      <text x="804" y="152" fill="#F5F7FA" font-size="17" font-weight="500">Data</text>
+      <text x="804" y="174" fill="#9FB8D6" font-size="10">Clean, structured,</text>
+      <text x="804" y="188" fill="#9FB8D6" font-size="10">audited.</text>
+
+      <text x="930" y="126" fill="#7FA6C9" font-size="9" font-weight="600" letter-spacing="2">MODEL</text>
+      <text x="930" y="152" fill="#F5F7FA" font-size="17" font-weight="500">Insight</text>
+      <text x="930" y="174" fill="#9FB8D6" font-size="10">Statistical +</text>
+      <text x="930" y="188" fill="#9FB8D6" font-size="10">causal.</text>
+
+      <text x="1056" y="126" fill="#7FA6C9" font-size="9" font-weight="600" letter-spacing="2">DECISION</text>
+      <text x="1056" y="152" fill="#F5F7FA" font-size="17" font-weight="500">Decision</text>
+      <text x="1056" y="174" fill="#9FB8D6" font-size="10">Trade-offs,</text>
+      <text x="1056" y="188" fill="#9FB8D6" font-size="10">choices.</text>
+    </g>
+
+    <g stroke="#B08D57" stroke-width="1.2">
+      <path d="M878 146H902"/>
+      <path d="M1004 146H1028"/>
+    </g>
+    <g fill="#B08D57">
+      <path d="M898 142L904 146L898 150Z"/>
+      <path d="M1024 142L1030 146L1024 150Z"/>
+    </g>
+
+    <path d="M804 256H1116" stroke="#1E3A5F"/>
+    <path d="M804 256L852 242L900 248L948 220L996 228L1044 204L1092 212L1116 198" stroke="#B08D57" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="420" stroke-dashoffset="420">
+      <animate attributeName="stroke-dashoffset" from="420" to="0" dur="2.8s" fill="freeze"/>
+    </path>
+    <g fill="#D6C08A">
+      <circle cx="948" cy="220" r="3"><animate attributeName="opacity" values="0.35;1;0.35" dur="3.2s" repeatCount="indefinite"/></circle>
+      <circle cx="1092" cy="212" r="3"><animate attributeName="opacity" values="0.35;1;0.35" dur="4.1s" repeatCount="indefinite"/></circle>
+    </g>
+    <text x="804" y="278" fill="#7FA6C9" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="9" letter-spacing="1.5">FROM DATA TO A DEFENSIBLE DECISION</text>
+  </g>
+
+  <g fill="#B08D57">
+    <circle cx="748" cy="112" r="2.4"><animate attributeName="opacity" values="0.1;0.9;0.1" dur="4.2s" repeatCount="indefinite"/></circle>
+    <circle cx="760" cy="264" r="1.8"><animate attributeName="opacity" values="0.2;0.8;0.2" dur="5.1s" repeatCount="indefinite"/></circle>
+    <circle cx="1160" cy="180" r="2.2"><animate attributeName="opacity" values="0.1;0.9;0.1" dur="3.7s" repeatCount="indefinite"/></circle>
+    <circle cx="1150" cy="250" r="1.6"><animate attributeName="opacity" values="0.2;0.8;0.2" dur="4.8s" repeatCount="indefinite"/></circle>
+    <circle cx="620" cy="86" r="1.8"><animate attributeName="opacity" values="0.1;0.7;0.1" dur="5.6s" repeatCount="indefinite"/></circle>
+    <circle cx="668" cy="282" r="2.0"><animate attributeName="opacity" values="0.15;0.8;0.15" dur="4.4s" repeatCount="indefinite"/></circle>
+    <circle cx="460" cy="58" r="1.5"><animate attributeName="opacity" values="0.1;0.7;0.1" dur="6s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <circle cx="1068" cy="168" r="132" stroke="#B08D57" stroke-opacity="0.12" stroke-dasharray="3 12">
+    <animateTransform attributeName="transform" type="rotate" from="0 1068 168" to="360 1068 168" dur="40s" repeatCount="indefinite"/>
+  </circle>
+</svg>

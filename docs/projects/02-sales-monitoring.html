@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C2C56"><title>车型销量监测与客户份额分析 · Aaron Zhang</title>
+<style>
+:root{
+  --bg:#0C2C56; --gold:#B08D57; --gold2:#D6C08A; --ivory:#F5F7FA; --steel:#9FB8D6;
+  --line:rgba(176,141,87,.24);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+a,a:visited{color:var(--gold2);text-decoration:none}
+a:hover{color:#F1DFC0}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0C2C56;color:#DCE8F2;font-family:var(--sans);line-height:1.75;overflow-x:hidden;font-size:16px}
+body::before{content:"";position:fixed;inset:0;z-index:-4;background:
+ radial-gradient(circle at 84% 8%,rgba(56,112,156,.34),transparent 40%),
+ radial-gradient(circle at 12% 18%,rgba(30,88,132,.34),transparent 38%),
+ radial-gradient(circle at 20% 76%,rgba(176,141,87,.08),transparent 34%),
+ linear-gradient(135deg,#092447 0%,#0C2C56 34%,#123F74 62%,#0B2A52 100%)}
+#bgPattern{position:fixed;inset:-8%;z-index:-3;pointer-events:none;background:url("../assets/bg-analytics.svg") center/1600px 1200px repeat;opacity:.95;animation:drift 80s linear infinite alternate}
+@keyframes drift{from{background-position:0 0}to{background-position:120px 80px}}
+#grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.32;background:url("../assets/grain.png");background-size:160px 160px;mix-blend-mode:soft-light}
+.page{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:26px 28px 80px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:8px 2px 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.back{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.5px;border-bottom:1px solid rgba(176,141,87,.35);padding-bottom:2px}
+.back:hover{color:#F1DFC0;border-color:var(--gold2)}
+.frame{position:relative;border:1px solid rgba(176,141,87,.32);border-radius:18px;padding:34px 38px;background:linear-gradient(180deg,rgba(10,35,72,.72),rgba(8,27,56,.58));box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.frame::before,.frame::after{content:"";position:absolute;width:30px;height:30px;pointer-events:none}
+.frame::before{top:10px;left:10px;border-top:1px solid rgba(176,141,87,.75);border-left:1px solid rgba(176,141,87,.75)}
+.frame::after{bottom:10px;right:10px;border-bottom:1px solid rgba(176,141,87,.75);border-right:1px solid rgba(176,141,87,.75)}
+.case-label{color:var(--gold);font:600 10px/1 var(--sans);letter-spacing:3px;margin-bottom:20px}
+.markdown-body h1,.markdown-body h2,.markdown-body h3{font-family:var(--serif);color:var(--ivory);font-weight:500;line-height:1.25}
+.markdown-body h1{font-size:clamp(34px,4.5vw,54px);margin:0 0 20px;padding-bottom:18px;border-bottom:1px solid var(--line);position:relative}
+.markdown-body h1::after{content:"";position:absolute;left:0;bottom:-1px;width:100px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.markdown-body h2{font-size:28px;margin:42px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(176,141,87,.16)}
+.markdown-body h3{font-size:21px;color:var(--gold2);margin:28px 0 12px}
+.markdown-body p{margin:0 0 16px;color:#CFDCEB}
+.markdown-body strong{color:var(--ivory)}
+.markdown-body em{color:var(--gold2);font-style:italic}
+.markdown-body a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(176,141,87,.30)}
+.markdown-body a:hover{color:#F1DFC0;border-color:var(--gold2)}
+.markdown-body img{max-width:100%;height:auto;border:1px solid rgba(176,141,87,.28);border-radius:10px;margin:10px 0;background:rgba(6,21,46,.4)}
+.markdown-body ul,.markdown-body ol{padding-left:1.3em}
+.markdown-body li{margin:.35em 0}
+.markdown-body blockquote{margin:22px 0;padding:14px 18px;border-left:2px solid var(--gold);background:rgba(10,35,72,.48);color:#B8CBE2;border-radius:0 8px 8px 0}
+.markdown-body code{background:rgba(5,17,38,.8);color:var(--gold2);padding:.16em .42em;border:1px solid rgba(176,141,87,.16);border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,Consolas,monospace}
+.markdown-body pre{background:rgba(5,17,38,.8);border:1px solid var(--line);border-radius:8px;padding:16px;overflow:auto}
+.markdown-body hr{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+.markdown-body table{width:100%;border-collapse:separate;border-spacing:8px;margin:16px 0}
+.markdown-body th,.markdown-body td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;border-radius:6px}
+.markdown-body th{background:rgba(22,64,112,.7);color:var(--gold2);text-align:left}
+.markdown-body td{background:rgba(10,35,72,.55)}
+markdown-accessiblity-table{display:block;overflow-x:auto}
+.bottom{display:flex;justify-content:space-between;gap:18px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.bottom a{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.4px}
+@media(max-width:760px){.page{padding:14px 12px 60px}.frame{padding:22px 16px}.topbar{font-size:10px}.markdown-body table,.markdown-body tbody,.markdown-body tr,.markdown-body td{display:block;width:100%!important}.markdown-body table{border-spacing:0}.markdown-body th{display:none}}
+</style></head><body>
+<div id="bgPattern"></div><div id="grain"></div>
+<div class="page">
+  <div class="topbar"><a class="back" href="../index.html">← 返回主页</a><div style="display:flex;gap:18px"><a href="./index.html">项目列表</a></div></div>
+  <div class="case-label">CASE STUDY · 02</div>
+  <div class="frame"><div class="markdown-body"><h1>车型销量监测与客户份额分析</h1>
+<blockquote>
+<p>用 103 个品牌、738 个车系的月度终端销量，搭建一套能回答「车型为什么滞销、客户份额为什么流失」的监测体系。</p>
+</blockquote>
+<markdown-accessiblity-table><table role="table">
+<tbody><tr>
+<td><strong>公司</strong></td>
+<td>本特勒投资（中国）有限公司</td>
+</tr>
+<tr>
+<td><strong>时间</strong></td>
+<td>2026.07 – 至今</td>
+</tr>
+<tr>
+<td><strong>角色</strong></td>
+<td>供应链数字化实习生 · 搭建 / 维护</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td><code class="notranslate">Python</code> <code class="notranslate">数据清洗</code> <code class="notranslate">Excel</code> <code class="notranslate">指标体系</code></td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<h2>背景 / Context</h2>
+<p>公司需要同时看两件事：</p>
+<ol>
+<li><strong>市场端</strong>：整车厂客户的车卖得怎么样？哪些车型在增长，哪些在滞销？</li>
+<li><strong>供应端</strong>：公司实际供货量是多少？供货占比是否在变化？</li>
+</ol>
+<p>原来的信息分散在外部平台和内部报表里，缺少一套按月更新、能按品牌 / 车系 / 月份下钻的监测口径，难以支撑客户关系维护和供应决策。</p>
+<h2>我的工作 / What I did</h2>
+<p>我编写了懂车帝车型销量爬取脚本，并搭建月度销量监测体系：</p>
+<ul>
+<li><strong>数据采集</strong>：抓取车型销量数据，覆盖 <strong>103 个品牌、738 个车系</strong>。</li>
+<li><strong>时间窗口</strong>：维护 <strong>12 个月滚动数据</strong>，累计终端销量超过 <strong>2000 万辆</strong>。</li>
+<li><strong>清洗汇总</strong>：按月统计终端销量，处理车型改名、车系归属、重复记录等口径问题。</li>
+<li><strong>交叉比对</strong>：把终端销量与公司实际供货量对齐，计算供货占比。</li>
+<li><strong>指标下钻</strong>：按品牌、车系、月份三个维度拆解，构建「车型滞销 vs 客户份额流失」诊断框架。</li>
+<li><strong>业务输出</strong>：把异常车型、份额变化整理成可讨论的清单，支撑客户关系维护与供应决策。</li>
+</ul>
+<h2>结果 / Impact</h2>
+<ul>
+<li>建立覆盖 <strong>103 个品牌、738 个车系、12 个月</strong>的月度监测体系。</li>
+<li>累计覆盖终端销量 <strong>2000 万+</strong>。</li>
+<li>把「销量下降」从一句模糊判断，拆成可验证的 <strong>车型滞销 / 客户份额流失</strong> 两类问题，并给出下钻维度。</li>
+</ul>
+<h2>关键数据 / Key Numbers</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+<th>口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>覆盖品牌</td>
+<td>103 个</td>
+<td>懂车帝车型销量</td>
+</tr>
+<tr>
+<td>覆盖车系</td>
+<td>738 个</td>
+<td>可下钻到车系/月</td>
+</tr>
+<tr>
+<td>时间窗口</td>
+<td>12 个月滚动</td>
+<td>月度更新</td>
+</tr>
+<tr>
+<td>累计终端销量</td>
+<td>2000 万+</td>
+<td>覆盖车型的累计口径</td>
+</tr>
+<tr>
+<td>诊断维度</td>
+<td>2 类</td>
+<td>车型滞销 / 客户份额流失</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><a target="_blank" rel="noopener noreferrer" href="../assets/case-02-sales.png"><img src="../assets/case-02-sales.png" alt="车型销量监测体系" style="max-width: 100%;"></a></p>
+<p><sub>图：从懂车帝采集、清洗口径、月度汇总、供货比对到业务诊断的链路。</sub></p>
+<h2>结论 / Takeaways</h2>
+<ul>
+<li><strong>“销量下降”不是一个结论</strong>：要先区分是市场端车型整体滞销，还是供应端在客户中的份额下降，两者对应完全不同的动作。</li>
+<li><strong>口径比爬虫更难</strong>：车型改名、车系归属、重复记录、时间窗口，任何一个处理不一致都会让“份额变化”失真。</li>
+<li><strong>监测体系要能下钻</strong>：品牌 → 车系 → 月份三层结构，才能把异常定位到可以讨论的具体车型。</li>
+</ul>
+<h2>可迁移的能力 / What it shows</h2>
+<ul>
+<li><strong>指标设计</strong>：从业务问题倒推指标，而不是堆报表。</li>
+<li><strong>数据口径治理</strong>：车型改名、车系归属、时间窗口等细节决定分析是否可信。</li>
+<li><strong>从数据到决策</strong>：不只输出数字，而是输出可以拿去讨论的异常清单和假设。</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>说明</strong>：该项目为实习期间内部项目。以上仅展示问题拆解、方法和个人贡献，不包含公司数据、系统截图或源代码；部分细节已做脱敏和概括处理。</p>
+</blockquote></div></div>
+  <div class="bottom"><a href="../index.html">← 返回项目列表</a><a href="../index.html">AARON ZHANG / HOME</a></div>
+</div>
+</body></html>

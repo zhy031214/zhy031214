@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C2C56"><title>Fragrance Roaming · 一站式香水网站 · Aaron Zhang</title>
+<style>
+:root{
+  --bg:#0C2C56; --gold:#B08D57; --gold2:#D6C08A; --ivory:#F5F7FA; --steel:#9FB8D6;
+  --line:rgba(176,141,87,.24);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+a,a:visited{color:var(--gold2);text-decoration:none}
+a:hover{color:#F1DFC0}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0C2C56;color:#DCE8F2;font-family:var(--sans);line-height:1.75;overflow-x:hidden;font-size:16px}
+body::before{content:"";position:fixed;inset:0;z-index:-4;background:
+ radial-gradient(circle at 84% 8%,rgba(56,112,156,.34),transparent 40%),
+ radial-gradient(circle at 12% 18%,rgba(30,88,132,.34),transparent 38%),
+ radial-gradient(circle at 20% 76%,rgba(176,141,87,.08),transparent 34%),
+ linear-gradient(135deg,#092447 0%,#0C2C56 34%,#123F74 62%,#0B2A52 100%)}
+#bgPattern{position:fixed;inset:-8%;z-index:-3;pointer-events:none;background:url("../assets/bg-analytics.svg") center/1600px 1200px repeat;opacity:.95;animation:drift 80s linear infinite alternate}
+@keyframes drift{from{background-position:0 0}to{background-position:120px 80px}}
+#grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.32;background:url("../assets/grain.png");background-size:160px 160px;mix-blend-mode:soft-light}
+.page{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:26px 28px 80px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:8px 2px 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.back{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.5px;border-bottom:1px solid rgba(176,141,87,.35);padding-bottom:2px}
+.back:hover{color:#F1DFC0;border-color:var(--gold2)}
+.frame{position:relative;border:1px solid rgba(176,141,87,.32);border-radius:18px;padding:34px 38px;background:linear-gradient(180deg,rgba(10,35,72,.72),rgba(8,27,56,.58));box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.frame::before,.frame::after{content:"";position:absolute;width:30px;height:30px;pointer-events:none}
+.frame::before{top:10px;left:10px;border-top:1px solid rgba(176,141,87,.75);border-left:1px solid rgba(176,141,87,.75)}
+.frame::after{bottom:10px;right:10px;border-bottom:1px solid rgba(176,141,87,.75);border-right:1px solid rgba(176,141,87,.75)}
+.case-label{color:var(--gold);font:600 10px/1 var(--sans);letter-spacing:3px;margin-bottom:20px}
+.markdown-body h1,.markdown-body h2,.markdown-body h3{font-family:var(--serif);color:var(--ivory);font-weight:500;line-height:1.25}
+.markdown-body h1{font-size:clamp(34px,4.5vw,54px);margin:0 0 20px;padding-bottom:18px;border-bottom:1px solid var(--line);position:relative}
+.markdown-body h1::after{content:"";position:absolute;left:0;bottom:-1px;width:100px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.markdown-body h2{font-size:28px;margin:42px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(176,141,87,.16)}
+.markdown-body h3{font-size:21px;color:var(--gold2);margin:28px 0 12px}
+.markdown-body p{margin:0 0 16px;color:#CFDCEB}
+.markdown-body strong{color:var(--ivory)}
+.markdown-body em{color:var(--gold2);font-style:italic}
+.markdown-body a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(176,141,87,.30)}
+.markdown-body a:hover{color:#F1DFC0;border-color:var(--gold2)}
+.markdown-body img{max-width:100%;height:auto;border:1px solid rgba(176,141,87,.28);border-radius:10px;margin:10px 0;background:rgba(6,21,46,.4)}
+.markdown-body ul,.markdown-body ol{padding-left:1.3em}
+.markdown-body li{margin:.35em 0}
+.markdown-body blockquote{margin:22px 0;padding:14px 18px;border-left:2px solid var(--gold);background:rgba(10,35,72,.48);color:#B8CBE2;border-radius:0 8px 8px 0}
+.markdown-body code{background:rgba(5,17,38,.8);color:var(--gold2);padding:.16em .42em;border:1px solid rgba(176,141,87,.16);border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,Consolas,monospace}
+.markdown-body pre{background:rgba(5,17,38,.8);border:1px solid var(--line);border-radius:8px;padding:16px;overflow:auto}
+.markdown-body hr{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+.markdown-body table{width:100%;border-collapse:separate;border-spacing:8px;margin:16px 0}
+.markdown-body th,.markdown-body td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;border-radius:6px}
+.markdown-body th{background:rgba(22,64,112,.7);color:var(--gold2);text-align:left}
+.markdown-body td{background:rgba(10,35,72,.55)}
+markdown-accessiblity-table{display:block;overflow-x:auto}
+.bottom{display:flex;justify-content:space-between;gap:18px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.bottom a{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.4px}
+@media(max-width:760px){.page{padding:14px 12px 60px}.frame{padding:22px 16px}.topbar{font-size:10px}.markdown-body table,.markdown-body tbody,.markdown-body tr,.markdown-body td{display:block;width:100%!important}.markdown-body table{border-spacing:0}.markdown-body th{display:none}}
+</style></head><body>
+<div id="bgPattern"></div><div id="grain"></div>
+<div class="page">
+  <div class="topbar"><a class="back" href="../index.html">← 返回主页</a><div style="display:flex;gap:18px"><a href="./index.html">项目列表</a></div></div>
+  <div class="case-label">CASE STUDY · 11</div>
+  <div class="frame"><div class="markdown-body"><h1>Fragrance Roaming · 一站式香水网站</h1>
+<blockquote>
+<p>从香水数据库、社区论坛到 AI 推荐与门店地图，独立负责一个完整网站的产品设计与全栈实现。</p>
+</blockquote>
+<markdown-accessiblity-table><table role="table">
+<tbody><tr>
+<td><strong>项目</strong></td>
+<td>课程项目 · 团队负责人</td>
+</tr>
+<tr>
+<td><strong>时间</strong></td>
+<td>2025.07 – 2025.08</td>
+</tr>
+<tr>
+<td><strong>角色</strong></td>
+<td>产品设计 / 前端 / 后端 / 数据库</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td><code class="notranslate">Vue</code> <code class="notranslate">PHP</code> <code class="notranslate">MySQL</code> <code class="notranslate">Bootstrap</code> <code class="notranslate">AJAX</code></td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<h2>背景 / Context</h2>
+<p>香水爱好者的信息分散在电商详情页、社区帖子和线下门店里：新手不知道怎么选，进阶用户想查香调、品牌和相似香，专业用户又缺少一个可以讨论和沉淀内容的社区。</p>
+<p>项目目标是做一个「从入门到进阶」的一站式香水网站，把<strong>香水数据库、社区论坛、个性化推荐和门店位置</strong>放在同一个入口里。</p>
+<h2>我的工作 / What I did</h2>
+<ul>
+<li>设计并整合香水信息数据库与论坛模块，覆盖从新手到专业用户的不同需求。</li>
+<li>集成阿里云 AI 大模型，实现个性化香水推荐。</li>
+<li>集成高德地图 API，支持香水品牌门店位置查询。</li>
+<li>使用 HTML、CSS、JavaScript 实现前端，结合 Bootstrap、AJAX 和 Vue 提升交互与开发效率。</li>
+<li>使用 MySQL + Navicat 设计后端数据库，通过 PHP 连接前后端。</li>
+<li>负责团队分工、进度推进和最终答辩。</li>
+</ul>
+<h2>结果 / Impact</h2>
+<ul>
+<li>网站上线运营一个月，服务 <strong>100+ 用户</strong>，累计 <strong>2,700 页面浏览</strong>。</li>
+<li>课程项目获 <strong>A+</strong>，在同届中排名第一。</li>
+<li>完成从需求、数据库、前后端到第三方 API 集成的完整闭环。</li>
+</ul>
+<h2>关键数据 / Key Numbers</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+<th>口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>运营用户</td>
+<td>100+</td>
+<td>上线首月</td>
+</tr>
+<tr>
+<td>页面浏览</td>
+<td>2,700</td>
+<td>累计</td>
+</tr>
+<tr>
+<td>课程成绩</td>
+<td>A+ / 同届第一</td>
+<td>课程项目</td>
+</tr>
+<tr>
+<td>功能模块</td>
+<td>5 类</td>
+<td>数据库 / 论坛 / AI 推荐 / 地图 / 后台</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><a target="_blank" rel="noopener noreferrer" href="../assets/case-11-fragrance.png"><img src="../assets/case-11-fragrance.png" alt="香水网站架构" style="max-width: 100%;"></a></p>
+<p><sub>图：Vue 前端、PHP 接口、MySQL、阿里云 AI 推荐与高德地图的完整链路。</sub></p>
+<h2>结论 / Takeaways</h2>
+<ul>
+<li><strong>产品不是页面堆叠</strong>：香水数据库、社区、推荐和门店地图要围绕“从入门到进阶”的用户路径组织。</li>
+<li><strong>全栈能力体现在接口边界</strong>：前端交互、PHP 接口、MySQL 表结构和第三方 API 要一起设计。</li>
+<li><strong>真实用户数据比课程分数更有说服力</strong>：首月 100+ 用户、2,700 浏览，说明原型至少被真实使用过。</li>
+</ul>
+<h2>可迁移的能力 / What it shows</h2>
+<ul>
+<li><strong>产品思维</strong>：不是做一个「能看的页面」，而是把信息、社区和推荐串成用户路径。</li>
+<li><strong>全栈落地</strong>：前端交互、后端接口、数据库设计和第三方 API 集成。</li>
+<li><strong>从 0 到 1</strong>：在短时间内把想法做成可运行、可被真实用户使用的产品。</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>说明</strong>：该项目为课程项目，目前没有公开的线上 Demo；源代码和系统截图可在面试中展示。</p>
+</blockquote></div></div>
+  <div class="bottom"><a href="../index.html">← 返回项目列表</a><a href="../index.html">AARON ZHANG / HOME</a></div>
+</div>
+</body></html>

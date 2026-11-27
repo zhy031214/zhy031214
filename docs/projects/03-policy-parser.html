@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C2C56"><title>政策文本智能解析 · Aaron Zhang</title>
+<style>
+:root{
+  --bg:#0C2C56; --gold:#B08D57; --gold2:#D6C08A; --ivory:#F5F7FA; --steel:#9FB8D6;
+  --line:rgba(176,141,87,.24);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+a,a:visited{color:var(--gold2);text-decoration:none}
+a:hover{color:#F1DFC0}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0C2C56;color:#DCE8F2;font-family:var(--sans);line-height:1.75;overflow-x:hidden;font-size:16px}
+body::before{content:"";position:fixed;inset:0;z-index:-4;background:
+ radial-gradient(circle at 84% 8%,rgba(56,112,156,.34),transparent 40%),
+ radial-gradient(circle at 12% 18%,rgba(30,88,132,.34),transparent 38%),
+ radial-gradient(circle at 20% 76%,rgba(176,141,87,.08),transparent 34%),
+ linear-gradient(135deg,#092447 0%,#0C2C56 34%,#123F74 62%,#0B2A52 100%)}
+#bgPattern{position:fixed;inset:-8%;z-index:-3;pointer-events:none;background:url("../assets/bg-analytics.svg") center/1600px 1200px repeat;opacity:.95;animation:drift 80s linear infinite alternate}
+@keyframes drift{from{background-position:0 0}to{background-position:120px 80px}}
+#grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.32;background:url("../assets/grain.png");background-size:160px 160px;mix-blend-mode:soft-light}
+.page{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:26px 28px 80px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:8px 2px 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.back{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.5px;border-bottom:1px solid rgba(176,141,87,.35);padding-bottom:2px}
+.back:hover{color:#F1DFC0;border-color:var(--gold2)}
+.frame{position:relative;border:1px solid rgba(176,141,87,.32);border-radius:18px;padding:34px 38px;background:linear-gradient(180deg,rgba(10,35,72,.72),rgba(8,27,56,.58));box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.frame::before,.frame::after{content:"";position:absolute;width:30px;height:30px;pointer-events:none}
+.frame::before{top:10px;left:10px;border-top:1px solid rgba(176,141,87,.75);border-left:1px solid rgba(176,141,87,.75)}
+.frame::after{bottom:10px;right:10px;border-bottom:1px solid rgba(176,141,87,.75);border-right:1px solid rgba(176,141,87,.75)}
+.case-label{color:var(--gold);font:600 10px/1 var(--sans);letter-spacing:3px;margin-bottom:20px}
+.markdown-body h1,.markdown-body h2,.markdown-body h3{font-family:var(--serif);color:var(--ivory);font-weight:500;line-height:1.25}
+.markdown-body h1{font-size:clamp(34px,4.5vw,54px);margin:0 0 20px;padding-bottom:18px;border-bottom:1px solid var(--line);position:relative}
+.markdown-body h1::after{content:"";position:absolute;left:0;bottom:-1px;width:100px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.markdown-body h2{font-size:28px;margin:42px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(176,141,87,.16)}
+.markdown-body h3{font-size:21px;color:var(--gold2);margin:28px 0 12px}
+.markdown-body p{margin:0 0 16px;color:#CFDCEB}
+.markdown-body strong{color:var(--ivory)}
+.markdown-body em{color:var(--gold2);font-style:italic}
+.markdown-body a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(176,141,87,.30)}
+.markdown-body a:hover{color:#F1DFC0;border-color:var(--gold2)}
+.markdown-body img{max-width:100%;height:auto;border:1px solid rgba(176,141,87,.28);border-radius:10px;margin:10px 0;background:rgba(6,21,46,.4)}
+.markdown-body ul,.markdown-body ol{padding-left:1.3em}
+.markdown-body li{margin:.35em 0}
+.markdown-body blockquote{margin:22px 0;padding:14px 18px;border-left:2px solid var(--gold);background:rgba(10,35,72,.48);color:#B8CBE2;border-radius:0 8px 8px 0}
+.markdown-body code{background:rgba(5,17,38,.8);color:var(--gold2);padding:.16em .42em;border:1px solid rgba(176,141,87,.16);border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,Consolas,monospace}
+.markdown-body pre{background:rgba(5,17,38,.8);border:1px solid var(--line);border-radius:8px;padding:16px;overflow:auto}
+.markdown-body hr{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+.markdown-body table{width:100%;border-collapse:separate;border-spacing:8px;margin:16px 0}
+.markdown-body th,.markdown-body td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;border-radius:6px}
+.markdown-body th{background:rgba(22,64,112,.7);color:var(--gold2);text-align:left}
+.markdown-body td{background:rgba(10,35,72,.55)}
+markdown-accessiblity-table{display:block;overflow-x:auto}
+.bottom{display:flex;justify-content:space-between;gap:18px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.bottom a{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.4px}
+@media(max-width:760px){.page{padding:14px 12px 60px}.frame{padding:22px 16px}.topbar{font-size:10px}.markdown-body table,.markdown-body tbody,.markdown-body tr,.markdown-body td{display:block;width:100%!important}.markdown-body table{border-spacing:0}.markdown-body th{display:none}}
+</style></head><body>
+<div id="bgPattern"></div><div id="grain"></div>
+<div class="page">
+  <div class="topbar"><a class="back" href="../index.html">← 返回主页</a><div style="display:flex;gap:18px"><a href="./index.html">项目列表</a></div></div>
+  <div class="case-label">CASE STUDY · 03</div>
+  <div class="frame"><div class="markdown-body"><h1>政策文本智能解析</h1>
+<blockquote>
+<p>把长篇、非结构化的政策文件，按不同业务角色自动归纳要点，并索引回原文位置，变成可检索的结构化信息。</p>
+</blockquote>
+<markdown-accessiblity-table><table role="table">
+<tbody><tr>
+<td><strong>公司</strong></td>
+<td>本特勒投资（中国）有限公司</td>
+</tr>
+<tr>
+<td><strong>时间</strong></td>
+<td>2026.07 – 至今</td>
+</tr>
+<tr>
+<td><strong>角色</strong></td>
+<td>供应链数字化实习生 · 开发 / 交付</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td><code class="notranslate">Python</code> <code class="notranslate">文本解析</code> <code class="notranslate">结构化字段</code> <code class="notranslate">角色化摘要</code></td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<h2>背景 / Context</h2>
+<p>政策文件通常篇幅长、结构不统一，同一份文件对不同业务角色的影响也不同：供应链关心交付和通关，财务关心成本和合规，管理层关心方向和风险。</p>
+<p>原来的做法是人工通读、摘录、转发，存在三个问题：</p>
+<ul>
+<li><strong>找得慢</strong>：关键条款埋在大段文字里，检索成本高。</li>
+<li><strong>口径不一</strong>：不同人摘出来的重点不一样。</li>
+<li><strong>无法追溯</strong>：摘要和原文对不上，难以复核。</li>
+</ul>
+<h2>我的工作 / What I did</h2>
+<p>我开发了一个政策文件解析工具，把「原文 → 结构化 → 可检索」串起来：</p>
+<ol>
+<li><strong>文本解析</strong>：读取政策文件，按章节、条款、段落切分。</li>
+<li><strong>角色化摘要</strong>：针对不同业务角色，生成不同关注点的要点归纳。</li>
+<li><strong>原文定位</strong>：为每条摘要保留原文位置索引，点击可以回到出处。</li>
+<li><strong>结构化存储</strong>：把政策主题、适用对象、关键条款、时间节点等字段抽出来，形成可筛选的记录。</li>
+<li><strong>持续使用</strong>：工具交付给团队日常使用，累计解析记录 <strong>300+ 条</strong>。</li>
+</ol>
+<h2>结果 / Impact</h2>
+<ul>
+<li>累计解析 <strong>300+ 条</strong>政策记录，工具被团队持续使用。</li>
+<li>把「通读全文找重点」变成「按角色看摘要 + 回原文复核」。</li>
+<li>每条摘要可追溯，降低误读和二次确认成本。</li>
+</ul>
+<h2>关键数据 / Key Numbers</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+<th>口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>累计解析</td>
+<td>300+ 条</td>
+<td>政策记录</td>
+</tr>
+<tr>
+<td>角色视角</td>
+<td>3 类</td>
+<td>供应链 / 财务 / 管理层</td>
+</tr>
+<tr>
+<td>原文索引</td>
+<td>1:1</td>
+<td>每条摘要保留原文位置</td>
+</tr>
+<tr>
+<td>交付状态</td>
+<td>持续使用</td>
+<td>团队日常检索</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><a target="_blank" rel="noopener noreferrer" href="../assets/case-03-policy.png"><img src="../assets/case-03-policy.png" alt="政策文本解析流程" style="max-width: 100%;"></a></p>
+<p><sub>图：原文读取、结构切分、角色化摘要、原文定位到检索复核的流程。</sub></p>
+<h2>结论 / Takeaways</h2>
+<ul>
+<li><strong>同一份政策，对不同角色不是同一件事</strong>：供应链看交付和通关，财务看成本和合规，管理层看方向和风险；角色化摘要比“一份通用摘要”更有用。</li>
+<li><strong>摘要必须能回到原文</strong>：没有原文索引的摘要不敢用于业务判断；可追溯性是这类工具能不能被真正使用的分界线。</li>
+<li><strong>先设计字段，再设计解析</strong>：主题、适用对象、关键条款、时间节点这些字段决定了后续能不能筛选和复核。</li>
+</ul>
+<h2>可迁移的能力 / What it shows</h2>
+<ul>
+<li><strong>信息架构</strong>：先定义字段和检索方式，再决定怎么解析。</li>
+<li><strong>可追溯设计</strong>：摘要必须能回到原文，才敢用于业务判断。</li>
+<li><strong>角色化思维</strong>：同一份信息，对不同使用者要有不同的呈现方式。</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>说明</strong>：该项目为实习期间内部项目。以上仅展示问题拆解、方法和个人贡献，不包含公司数据、系统截图或源代码；部分细节已做脱敏和概括处理。</p>
+</blockquote></div></div>
+  <div class="bottom"><a href="../index.html">← 返回项目列表</a><a href="../index.html">AARON ZHANG / HOME</a></div>
+</div>
+</body></html>

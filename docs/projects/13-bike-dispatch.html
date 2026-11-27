@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C2C56"><title>哈啰单车调度优化 · Aaron Zhang</title>
+<style>
+:root{
+  --bg:#0C2C56; --gold:#B08D57; --gold2:#D6C08A; --ivory:#F5F7FA; --steel:#9FB8D6;
+  --line:rgba(176,141,87,.24);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+a,a:visited{color:var(--gold2);text-decoration:none}
+a:hover{color:#F1DFC0}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0C2C56;color:#DCE8F2;font-family:var(--sans);line-height:1.75;overflow-x:hidden;font-size:16px}
+body::before{content:"";position:fixed;inset:0;z-index:-4;background:
+ radial-gradient(circle at 84% 8%,rgba(56,112,156,.34),transparent 40%),
+ radial-gradient(circle at 12% 18%,rgba(30,88,132,.34),transparent 38%),
+ radial-gradient(circle at 20% 76%,rgba(176,141,87,.08),transparent 34%),
+ linear-gradient(135deg,#092447 0%,#0C2C56 34%,#123F74 62%,#0B2A52 100%)}
+#bgPattern{position:fixed;inset:-8%;z-index:-3;pointer-events:none;background:url("../assets/bg-analytics.svg") center/1600px 1200px repeat;opacity:.95;animation:drift 80s linear infinite alternate}
+@keyframes drift{from{background-position:0 0}to{background-position:120px 80px}}
+#grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.32;background:url("../assets/grain.png");background-size:160px 160px;mix-blend-mode:soft-light}
+.page{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:26px 28px 80px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:8px 2px 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.back{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.5px;border-bottom:1px solid rgba(176,141,87,.35);padding-bottom:2px}
+.back:hover{color:#F1DFC0;border-color:var(--gold2)}
+.frame{position:relative;border:1px solid rgba(176,141,87,.32);border-radius:18px;padding:34px 38px;background:linear-gradient(180deg,rgba(10,35,72,.72),rgba(8,27,56,.58));box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.frame::before,.frame::after{content:"";position:absolute;width:30px;height:30px;pointer-events:none}
+.frame::before{top:10px;left:10px;border-top:1px solid rgba(176,141,87,.75);border-left:1px solid rgba(176,141,87,.75)}
+.frame::after{bottom:10px;right:10px;border-bottom:1px solid rgba(176,141,87,.75);border-right:1px solid rgba(176,141,87,.75)}
+.case-label{color:var(--gold);font:600 10px/1 var(--sans);letter-spacing:3px;margin-bottom:20px}
+.markdown-body h1,.markdown-body h2,.markdown-body h3{font-family:var(--serif);color:var(--ivory);font-weight:500;line-height:1.25}
+.markdown-body h1{font-size:clamp(34px,4.5vw,54px);margin:0 0 20px;padding-bottom:18px;border-bottom:1px solid var(--line);position:relative}
+.markdown-body h1::after{content:"";position:absolute;left:0;bottom:-1px;width:100px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.markdown-body h2{font-size:28px;margin:42px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(176,141,87,.16)}
+.markdown-body h3{font-size:21px;color:var(--gold2);margin:28px 0 12px}
+.markdown-body p{margin:0 0 16px;color:#CFDCEB}
+.markdown-body strong{color:var(--ivory)}
+.markdown-body em{color:var(--gold2);font-style:italic}
+.markdown-body a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(176,141,87,.30)}
+.markdown-body a:hover{color:#F1DFC0;border-color:var(--gold2)}
+.markdown-body img{max-width:100%;height:auto;border:1px solid rgba(176,141,87,.28);border-radius:10px;margin:10px 0;background:rgba(6,21,46,.4)}
+.markdown-body ul,.markdown-body ol{padding-left:1.3em}
+.markdown-body li{margin:.35em 0}
+.markdown-body blockquote{margin:22px 0;padding:14px 18px;border-left:2px solid var(--gold);background:rgba(10,35,72,.48);color:#B8CBE2;border-radius:0 8px 8px 0}
+.markdown-body code{background:rgba(5,17,38,.8);color:var(--gold2);padding:.16em .42em;border:1px solid rgba(176,141,87,.16);border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,Consolas,monospace}
+.markdown-body pre{background:rgba(5,17,38,.8);border:1px solid var(--line);border-radius:8px;padding:16px;overflow:auto}
+.markdown-body hr{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+.markdown-body table{width:100%;border-collapse:separate;border-spacing:8px;margin:16px 0}
+.markdown-body th,.markdown-body td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;border-radius:6px}
+.markdown-body th{background:rgba(22,64,112,.7);color:var(--gold2);text-align:left}
+.markdown-body td{background:rgba(10,35,72,.55)}
+markdown-accessiblity-table{display:block;overflow-x:auto}
+.bottom{display:flex;justify-content:space-between;gap:18px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.bottom a{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.4px}
+@media(max-width:760px){.page{padding:14px 12px 60px}.frame{padding:22px 16px}.topbar{font-size:10px}.markdown-body table,.markdown-body tbody,.markdown-body tr,.markdown-body td{display:block;width:100%!important}.markdown-body table{border-spacing:0}.markdown-body th{display:none}}
+</style></head><body>
+<div id="bgPattern"></div><div id="grain"></div>
+<div class="page">
+  <div class="topbar"><a class="back" href="../index.html">← 返回主页</a><div style="display:flex;gap:18px"><a href="./index.html">项目列表</a></div></div>
+  <div class="case-label">CASE STUDY · 13</div>
+  <div class="frame"><div class="markdown-body"><h1>哈啰单车调度优化</h1>
+<blockquote>
+<p>用整数规划为哈啰出行设计上海市区的单车调度方案：4 个需求点、3 辆运输车、100 辆单车，在需求上下限和运力约束下优化运输成本与利润。</p>
+</blockquote>
+<markdown-accessiblity-table><table role="table">
+<tbody><tr>
+<td><strong>项目</strong></td>
+<td>运筹学课程案例 · 小组项目（全面参与）</td>
+</tr>
+<tr>
+<td><strong>时间</strong></td>
+<td>2024 秋</td>
+</tr>
+<tr>
+<td><strong>方向</strong></td>
+<td>运营优化 / 整数规划 / 路径调度</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td><code class="notranslate">Python</code> <code class="notranslate">OR-Tools</code> <code class="notranslate">SCIP</code> <code class="notranslate">Integer Programming</code></td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<h2>问题 / Problem</h2>
+<p>哈啰出行在上海的部分区域存在明显的潮汐需求：有的点位单车积压，有的点位供给不足。案例设定一个配送中心（Depot）和 4 个需求点，由 3 辆运输车完成 100 辆单车的调度。</p>
+<p>每辆车有不同容量和每公里运价，每个需求点有最小/最大需求量、距离和单车利润。目标是在满足需求区间和车辆容量的前提下，决定每辆车向每个点位运送多少单车、走什么路径，使<strong>总利润最大、运输成本最小</strong>。</p>
+<h2>模型 / Model</h2>
+<ul>
+<li>决策变量：车辆 <code class="notranslate">i</code> 向需求点 <code class="notranslate">j</code> 运送的单车数量 <code class="notranslate">x_ij</code>。</li>
+<li>目标函数：各需求点利润之和 − 各车辆运输成本。</li>
+<li>约束条件：
+<ul>
+<li>每个需求点的供给量不低于最小需求、不高于最大需求；</li>
+<li>每辆车的配送量不超过其容量；</li>
+<li>车辆从配送中心出发并返回；</li>
+<li>运输量、车辆容量等为非负整数。</li>
+</ul>
+</li>
+<li>求解：用 Python 调用 <strong>OR-Tools</strong> 的线性求解器（SCIP）求解整数规划，并根据距离矩阵输出每辆车的路径与配送量。</li>
+</ul>
+<h2>结果 / Results</h2>
+<p>课程报告给出的结论是：通过合理分配 3 辆车的任务与路径，方案降低了运输成本，并提高了整体运营利润；同时避免了部分点位短缺、部分点位积压的情况。</p>
+<blockquote>
+<p>报告以模型、代码和求解结果为主，没有做统一的最优值前后对比。这里不补造具体百分比。</p>
+</blockquote>
+<h2>关键数据 / Key Numbers</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+<th>口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>需求点</td>
+<td>4 个</td>
+<td>最小/最大需求量</td>
+</tr>
+<tr>
+<td>运输车</td>
+<td>3 辆</td>
+<td>容量 50 / 30 / 20 辆</td>
+</tr>
+<tr>
+<td>单车</td>
+<td>100 辆</td>
+<td>配送中心出发</td>
+</tr>
+<tr>
+<td>求解器</td>
+<td>OR-Tools / SCIP</td>
+<td>整数规划</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><a target="_blank" rel="noopener noreferrer" href="../assets/case-13-bike.png"><img src="../assets/case-13-bike.png" alt="单车调度网络" style="max-width: 100%;"></a></p>
+<p><sub>图：配送中心、4 个需求点、3 辆不同容量车辆与约束条件；虚线为候选路径，不代表唯一最优解。</sub></p>
+<h2>结论 / Takeaways</h2>
+<ul>
+<li><strong>调度问题要同时看需求区间、容量、距离和利润</strong>：只追求“送得最多”会忽略运输成本，只追求“成本最低”会牺牲需求满足。</li>
+<li><strong>整数规划把业务语言变成可计算模型</strong>：决策变量、目标函数和约束条件必须一一对应业务规则。</li>
+<li><strong>不补造前后对比</strong>：原报告没有统一的最优值对照，本页只给出模型口径和求解方式，不虚构百分比。</li>
+</ul>
+<h2>这个项目说明了什么 / What it shows</h2>
+<ul>
+<li><strong>运筹建模</strong>：把业务描述转成变量、目标函数和约束条件。</li>
+<li><strong>求解器使用</strong>：用 OR-Tools/SCIP 处理整数规划，而不是只写伪代码。</li>
+<li><strong>运营视角</strong>：调度不只是“把车派出去”，还要同时考虑需求区间、容量、距离和利润。</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>说明</strong>：该项目为课程小组案例，案例页不包含完整代码和原始报告；需要时可在面试中展示。</p>
+</blockquote></div></div>
+  <div class="bottom"><a href="../index.html">← 返回项目列表</a><a href="../index.html">AARON ZHANG / HOME</a></div>
+</div>
+</body></html>

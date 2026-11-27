@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420" fill="none" role="img" aria-label="Ops Dashboard">
+<rect width="800" height="420" fill="#071A3A"/>
+<rect x="0" y="0" width="8" height="420" fill="#334E68"/>
+<rect x="0.5" y="0.5" width="799" height="419" fill="none" stroke="#24466E"/>
+<rect x="14" y="14" width="772" height="392" fill="none" stroke="#1E3A5F"/>
+<path d="M14 30V14H30M770 14H786V30M786 390V406H770M30 406H14V390" stroke="#B08D57" stroke-opacity="0.55" stroke-width="1.2"/>
+<text x="40" y="46" fill="#8FB3D9" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="2.4">09 / SYSTEMS</text>
+<text x="760" y="46" text-anchor="end" fill="#8FB3D9" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10" font-weight="500" letter-spacing="2">AARON ZHANG</text>
+<g transform="translate(55,95)">
+<rect x="0" y="0" width="560" height="170" rx="4" fill="#071A3A" stroke="#24466E"/>
+<rect x="18" y="18" width="90" height="134" rx="3" fill="#0B2244"/>
+<g fill="#24466E"><rect x="32" y="34" width="50" height="7" rx="3.5"/><rect x="32" y="52" width="38" height="6" rx="3"/><rect x="32" y="68" width="44" height="6" rx="3"/></g>
+<g fill="#071A3A" stroke="#24466E"><rect x="126" y="18" width="130" height="50" rx="3"/><rect x="270" y="18" width="130" height="50" rx="3"/><rect x="414" y="18" width="128" height="50" rx="3"/></g>
+<g fill="#F5F7FA"><rect x="140" y="42" width="40" height="12" rx="2"/></g><g fill="#7FA6C9"><rect x="284" y="42" width="48" height="12" rx="2"/></g><g fill="#B08D57"><rect x="428" y="42" width="58" height="12" rx="2"/></g>
+<path d="M126 128L190 112L254 120L318 92L382 104L446 78L510 88" stroke="#F5F7FA" stroke-width="2" fill="none"/>
+<path d="M126 154H542" stroke="#24466E"/>
+</g>
+<text x="40" y="362" fill="#F5F7FA" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="34" font-weight="600" letter-spacing="-0.4">Ops Dashboard</text>
+<text x="40" y="388" fill="#8FB3D9" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10" font-weight="500" letter-spacing="1.8">SQL · PRODUCTION · BOM</text>
+<text x="760" y="392" text-anchor="end" fill="#1E3A5F" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="84" font-weight="500">09</text>
+</svg>

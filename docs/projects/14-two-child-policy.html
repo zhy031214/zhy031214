@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C2C56"><title>全面二孩政策与家庭储蓄—消费（复现） · Aaron Zhang</title>
+<style>
+:root{
+  --bg:#0C2C56; --gold:#B08D57; --gold2:#D6C08A; --ivory:#F5F7FA; --steel:#9FB8D6;
+  --line:rgba(176,141,87,.24);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+a,a:visited{color:var(--gold2);text-decoration:none}
+a:hover{color:#F1DFC0}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0C2C56;color:#DCE8F2;font-family:var(--sans);line-height:1.75;overflow-x:hidden;font-size:16px}
+body::before{content:"";position:fixed;inset:0;z-index:-4;background:
+ radial-gradient(circle at 84% 8%,rgba(56,112,156,.34),transparent 40%),
+ radial-gradient(circle at 12% 18%,rgba(30,88,132,.34),transparent 38%),
+ radial-gradient(circle at 20% 76%,rgba(176,141,87,.08),transparent 34%),
+ linear-gradient(135deg,#092447 0%,#0C2C56 34%,#123F74 62%,#0B2A52 100%)}
+#bgPattern{position:fixed;inset:-8%;z-index:-3;pointer-events:none;background:url("../assets/bg-analytics.svg") center/1600px 1200px repeat;opacity:.95;animation:drift 80s linear infinite alternate}
+@keyframes drift{from{background-position:0 0}to{background-position:120px 80px}}
+#grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.32;background:url("../assets/grain.png");background-size:160px 160px;mix-blend-mode:soft-light}
+.page{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:26px 28px 80px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:8px 2px 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.back{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.5px;border-bottom:1px solid rgba(176,141,87,.35);padding-bottom:2px}
+.back:hover{color:#F1DFC0;border-color:var(--gold2)}
+.frame{position:relative;border:1px solid rgba(176,141,87,.32);border-radius:18px;padding:34px 38px;background:linear-gradient(180deg,rgba(10,35,72,.72),rgba(8,27,56,.58));box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.frame::before,.frame::after{content:"";position:absolute;width:30px;height:30px;pointer-events:none}
+.frame::before{top:10px;left:10px;border-top:1px solid rgba(176,141,87,.75);border-left:1px solid rgba(176,141,87,.75)}
+.frame::after{bottom:10px;right:10px;border-bottom:1px solid rgba(176,141,87,.75);border-right:1px solid rgba(176,141,87,.75)}
+.case-label{color:var(--gold);font:600 10px/1 var(--sans);letter-spacing:3px;margin-bottom:20px}
+.markdown-body h1,.markdown-body h2,.markdown-body h3{font-family:var(--serif);color:var(--ivory);font-weight:500;line-height:1.25}
+.markdown-body h1{font-size:clamp(34px,4.5vw,54px);margin:0 0 20px;padding-bottom:18px;border-bottom:1px solid var(--line);position:relative}
+.markdown-body h1::after{content:"";position:absolute;left:0;bottom:-1px;width:100px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.markdown-body h2{font-size:28px;margin:42px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(176,141,87,.16)}
+.markdown-body h3{font-size:21px;color:var(--gold2);margin:28px 0 12px}
+.markdown-body p{margin:0 0 16px;color:#CFDCEB}
+.markdown-body strong{color:var(--ivory)}
+.markdown-body em{color:var(--gold2);font-style:italic}
+.markdown-body a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(176,141,87,.30)}
+.markdown-body a:hover{color:#F1DFC0;border-color:var(--gold2)}
+.markdown-body img{max-width:100%;height:auto;border:1px solid rgba(176,141,87,.28);border-radius:10px;margin:10px 0;background:rgba(6,21,46,.4)}
+.markdown-body ul,.markdown-body ol{padding-left:1.3em}
+.markdown-body li{margin:.35em 0}
+.markdown-body blockquote{margin:22px 0;padding:14px 18px;border-left:2px solid var(--gold);background:rgba(10,35,72,.48);color:#B8CBE2;border-radius:0 8px 8px 0}
+.markdown-body code{background:rgba(5,17,38,.8);color:var(--gold2);padding:.16em .42em;border:1px solid rgba(176,141,87,.16);border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,Consolas,monospace}
+.markdown-body pre{background:rgba(5,17,38,.8);border:1px solid var(--line);border-radius:8px;padding:16px;overflow:auto}
+.markdown-body hr{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+.markdown-body table{width:100%;border-collapse:separate;border-spacing:8px;margin:16px 0}
+.markdown-body th,.markdown-body td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;border-radius:6px}
+.markdown-body th{background:rgba(22,64,112,.7);color:var(--gold2);text-align:left}
+.markdown-body td{background:rgba(10,35,72,.55)}
+markdown-accessiblity-table{display:block;overflow-x:auto}
+.bottom{display:flex;justify-content:space-between;gap:18px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.bottom a{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.4px}
+@media(max-width:760px){.page{padding:14px 12px 60px}.frame{padding:22px 16px}.topbar{font-size:10px}.markdown-body table,.markdown-body tbody,.markdown-body tr,.markdown-body td{display:block;width:100%!important}.markdown-body table{border-spacing:0}.markdown-body th{display:none}}
+</style></head><body>
+<div id="bgPattern"></div><div id="grain"></div>
+<div class="page">
+  <div class="topbar"><a class="back" href="../index.html">← 返回主页</a><div style="display:flex;gap:18px"><a href="./index.html">项目列表</a></div></div>
+  <div class="case-label">CASE STUDY · 14</div>
+  <div class="frame"><div class="markdown-body"><h1>全面二孩政策与家庭储蓄—消费（复现）</h1>
+<blockquote>
+<p>基于 CFPS / CHFS 微观数据，复现「全面二孩政策 → 家庭时间偏好 → 储蓄—消费」的 PSM-DID 分析流程。</p>
+</blockquote>
+<markdown-accessiblity-table><table role="table">
+<tbody><tr>
+<td><strong>项目</strong></td>
+<td>计量经济学课程论文 · 小组复现作业（全面参与）</td>
+</tr>
+<tr>
+<td><strong>时间</strong></td>
+<td>2025 秋</td>
+</tr>
+<tr>
+<td><strong>方向</strong></td>
+<td>应用计量 / 政策评估 / 因果推断</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td><code class="notranslate">Stata</code> <code class="notranslate">PSM-DID</code> <code class="notranslate">CFPS</code> <code class="notranslate">CHFS</code> <code class="notranslate">面板数据</code></td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<h2>背景 / Context</h2>
+<p>全面二孩政策会改变家庭的抚养压力、未来支出预期和跨期决策。项目关注的问题是：政策是否降低了政策敏感型家庭的时间偏好率，并进一步影响家庭的储蓄与消费结构。</p>
+<p>这是一个<strong>复现作业</strong>：核心是复现论文的识别思路和 PSM-DID 流程，而不是提出一个全新的研究问题。</p>
+<h2>数据 / Data</h2>
+<ul>
+<li>CFPS 2010–2020</li>
+<li>CHFS 2013–2019</li>
+<li>核心变量：家庭总消费、家庭总收入、家庭规模、生育信息、资产与负债等。</li>
+</ul>
+<p>数据清洗在 Stata 中完成：删除核心变量缺失样本；对连续经济变量在 1% / 99% 分位缩尾；保留至少连续两期被追踪的家庭；只保留生育记录完整、孩子出生年份明确的样本；检查收入/消费非负等逻辑。</p>
+<h2>方法 / Method</h2>
+<ol>
+<li>通过跨期消费欧拉方程测算家庭时间偏好率。</li>
+<li>用 Logit 估计倾向得分，做 1:1 最近邻匹配；并用核匹配、半径匹配做稳健性检查。</li>
+<li>在匹配样本上做 DID，比较政策前后处理组与对照组的时间偏好变化。</li>
+<li>按原文设计复现四组准实验，分别对应不同的生育行为/政策预期定义。</li>
+<li>做家庭特征异质性分析（经济脆弱性、幸福程度、健康状况、预期稳定性）。</li>
+</ol>
+<h2>结果 / Results</h2>
+<p>复现结果与原文的核心方向基本一致：全面二孩政策显著降低政策敏感型家庭的时间偏好率，使其更倾向未来消费；这一效应在经济脆弱性高、幸福程度高、健康状况优、预期稳定的家庭中更明显。机制上，时间偏好变化会进一步影响享受型消费占比、储蓄率和投资收益率。</p>
+<h2>关键数据 / Key Numbers</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+<th>口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>政策前时间偏好率</td>
+<td>2.56%</td>
+<td>CFPS / CHFS 年化</td>
+</tr>
+<tr>
+<td>政策后时间偏好率</td>
+<td>1.84%</td>
+<td>政策敏感型家庭</td>
+</tr>
+<tr>
+<td>变化</td>
+<td>-0.72 个百分点</td>
+<td>下降 28.13%</td>
+</tr>
+<tr>
+<td>贴现因子</td>
+<td>0.9750 → 0.9819</td>
+<td>未来效用现值上升</td>
+</tr>
+<tr>
+<td>数据</td>
+<td>CFPS 2010–2020 / CHFS 2013–2019</td>
+<td>微观面板</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><a target="_blank" rel="noopener noreferrer" href="../assets/case-14-rtp.png"><img src="../assets/case-14-rtp.png" alt="二孩政策与时间偏好率" style="max-width: 100%;"></a></p>
+<p><sub>图：政策前后时间偏好率对比，以及“政策 → 未来支出预期 → 时间偏好下降 → 储蓄上升”的机制链。</sub></p>
+<h2>结论 / Takeaways</h2>
+<ul>
+<li><strong>复现的核心结果成立</strong>：政策敏感型家庭的时间偏好率从 2.56% 降到 1.84%，更偏向未来消费。</li>
+<li><strong>异质性有方向</strong>：经济脆弱性高、幸福感高、健康好、预期稳定的家庭，政策效应更明显；“为孩子储蓄”的动机更强。</li>
+<li><strong>这是复现，不是原创</strong>：识别设计和结论归功于原论文；本项目的价值在于把数据清洗、PSM-DID 和稳健性流程真正跑通。</li>
+</ul>
+<h2>边界 / Limitations</h2>
+<ul>
+<li>这是复现，不是原创论文；结论应归功于原研究设计。</li>
+<li>政策组合、人口惯性、传统观念等因素难以完全控制。</li>
+<li>观察数据无法排除未测量混杂；稳健性检验仍有限。</li>
+</ul>
+<h2>这个项目说明了什么 / What it shows</h2>
+<ul>
+<li><strong>因果推断流程</strong>：从倾向得分、匹配、DID 到稳健性检查。</li>
+<li><strong>微观数据处理</strong>：缺失、缩尾、面板平衡、样本定义。</li>
+<li><strong>Stata 落地</strong>：把论文方法转成可执行的 do-file 和结果表。</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>说明</strong>：该项目为课程复现作业，案例页不包含原始微观数据；结论以课程论文为准。</p>
+</blockquote></div></div>
+  <div class="bottom"><a href="../index.html">← 返回项目列表</a><a href="../index.html">AARON ZHANG / HOME</a></div>
+</div>
+</body></html>

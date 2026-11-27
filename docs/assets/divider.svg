@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="28" viewBox="0 0 1200 28" fill="none" role="img" aria-label="Section divider">
+  <path d="M0 14H536" stroke="#24466E" stroke-opacity="0.28" stroke-width="1"/>
+  <path d="M664 14H1200" stroke="#24466E" stroke-opacity="0.28" stroke-width="1"/>
+  <rect x="593" y="7" width="14" height="14" transform="rotate(45 600 14)" fill="#FFFFFF" stroke="#B08D57" stroke-width="1.2"/>
+  <circle cx="600" cy="14" r="2" fill="#B08D57"/>
+  <path d="M520 10V18M680 10V18" stroke="#B08D57" stroke-opacity="0.55" stroke-width="1"/>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="120" viewBox="0 0 1200 120" fill="none" role="img" aria-label="Aaron Zhang footer">
+  <defs>
+    <linearGradient id="fbg" x1="0" y1="0" x2="1200" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#06152E"/>
+      <stop offset="1" stop-color="#0E2E5C"/>
+    </linearGradient>
+    <linearGradient id="fgold" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#D6C08A"/>
+      <stop offset="1" stop-color="#B08D57"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="120" rx="12" fill="url(#fbg)"/>
+  <rect x="0.5" y="0.5" width="1199" height="119" rx="11.5" stroke="#B08D57" stroke-opacity="0.35"/>
+  <path d="M24 24H1176M24 96H1176" stroke="#B08D57" stroke-opacity="0.28"/>
+  <path d="M24 24V40M24 24H40M1176 24V40M1176 24H1160M24 96V80M24 96H40M1176 96V80M1176 96H1160" stroke="#B08D57" stroke-width="1.2" stroke-opacity="0.6"/>
+
+  <text x="64" y="55" fill="#B08D57" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10" font-weight="600" letter-spacing="3">AARON ZHANG</text>
+  <text x="64" y="80" fill="#F5F7FA" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17" font-weight="400" letter-spacing="0.4">Business Analytics · Data · Decisions</text>
+  <text x="1136" y="56" text-anchor="end" fill="#7FA6C9" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10" letter-spacing="2">SHANGHAI · 2026</text>
+
+  <circle cx="1108" cy="78" r="18" stroke="#B08D57" stroke-opacity="0.55" fill="none"/>
+  <text x="1108" y="84" text-anchor="middle" fill="#C9B07A" font-family="Georgia, 'Times New Roman', serif" font-size="16">AZ</text>
+
+  <g fill="#B08D57">
+    <circle cx="420" cy="38" r="1.8"><animate attributeName="opacity" values="0.1;0.8;0.1" dur="4.2s" repeatCount="indefinite"/></circle>
+    <circle cx="700" cy="86" r="1.6"><animate attributeName="opacity" values="0.15;0.9;0.15" dur="5.1s" repeatCount="indefinite"/></circle>
+    <circle cx="930" cy="46" r="2.0"><animate attributeName="opacity" values="0.1;0.7;0.1" dur="3.8s" repeatCount="indefinite"/></circle>
+  </g>
+</svg>

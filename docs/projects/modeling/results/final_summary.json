@@ -1,0 +1,12 @@
+{
+  "dataset_rows": 12330,
+  "positive_rate": 0.15474452554744525,
+  "best_model": "RandomForest",
+  "best_cv_pr_auc": 0.754504489536904,
+  "test_pr_auc": 0.7290294465250684,
+  "test_roc_auc": 0.9199447799740733,
+  "selected_threshold": 0.4149999999999999,
+  "test_precision": 0.660574412532637,
+  "test_recall": 0.662303664921466,
+  "test_f1": 0.661437908496732
+}

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C2C56"><title>质量风险文本分析（FMEA） · Aaron Zhang</title>
+<style>
+:root{
+  --bg:#0C2C56; --gold:#B08D57; --gold2:#D6C08A; --ivory:#F5F7FA; --steel:#9FB8D6;
+  --line:rgba(176,141,87,.24);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+a,a:visited{color:var(--gold2);text-decoration:none}
+a:hover{color:#F1DFC0}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0C2C56;color:#DCE8F2;font-family:var(--sans);line-height:1.75;overflow-x:hidden;font-size:16px}
+body::before{content:"";position:fixed;inset:0;z-index:-4;background:
+ radial-gradient(circle at 84% 8%,rgba(56,112,156,.34),transparent 40%),
+ radial-gradient(circle at 12% 18%,rgba(30,88,132,.34),transparent 38%),
+ radial-gradient(circle at 20% 76%,rgba(176,141,87,.08),transparent 34%),
+ linear-gradient(135deg,#092447 0%,#0C2C56 34%,#123F74 62%,#0B2A52 100%)}
+#bgPattern{position:fixed;inset:-8%;z-index:-3;pointer-events:none;background:url("../assets/bg-analytics.svg") center/1600px 1200px repeat;opacity:.95;animation:drift 80s linear infinite alternate}
+@keyframes drift{from{background-position:0 0}to{background-position:120px 80px}}
+#grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.32;background:url("../assets/grain.png");background-size:160px 160px;mix-blend-mode:soft-light}
+.page{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:26px 28px 80px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:8px 2px 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.back{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.5px;border-bottom:1px solid rgba(176,141,87,.35);padding-bottom:2px}
+.back:hover{color:#F1DFC0;border-color:var(--gold2)}
+.frame{position:relative;border:1px solid rgba(176,141,87,.32);border-radius:18px;padding:34px 38px;background:linear-gradient(180deg,rgba(10,35,72,.72),rgba(8,27,56,.58));box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.frame::before,.frame::after{content:"";position:absolute;width:30px;height:30px;pointer-events:none}
+.frame::before{top:10px;left:10px;border-top:1px solid rgba(176,141,87,.75);border-left:1px solid rgba(176,141,87,.75)}
+.frame::after{bottom:10px;right:10px;border-bottom:1px solid rgba(176,141,87,.75);border-right:1px solid rgba(176,141,87,.75)}
+.case-label{color:var(--gold);font:600 10px/1 var(--sans);letter-spacing:3px;margin-bottom:20px}
+.markdown-body h1,.markdown-body h2,.markdown-body h3{font-family:var(--serif);color:var(--ivory);font-weight:500;line-height:1.25}
+.markdown-body h1{font-size:clamp(34px,4.5vw,54px);margin:0 0 20px;padding-bottom:18px;border-bottom:1px solid var(--line);position:relative}
+.markdown-body h1::after{content:"";position:absolute;left:0;bottom:-1px;width:100px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.markdown-body h2{font-size:28px;margin:42px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(176,141,87,.16)}
+.markdown-body h3{font-size:21px;color:var(--gold2);margin:28px 0 12px}
+.markdown-body p{margin:0 0 16px;color:#CFDCEB}
+.markdown-body strong{color:var(--ivory)}
+.markdown-body em{color:var(--gold2);font-style:italic}
+.markdown-body a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(176,141,87,.30)}
+.markdown-body a:hover{color:#F1DFC0;border-color:var(--gold2)}
+.markdown-body img{max-width:100%;height:auto;border:1px solid rgba(176,141,87,.28);border-radius:10px;margin:10px 0;background:rgba(6,21,46,.4)}
+.markdown-body ul,.markdown-body ol{padding-left:1.3em}
+.markdown-body li{margin:.35em 0}
+.markdown-body blockquote{margin:22px 0;padding:14px 18px;border-left:2px solid var(--gold);background:rgba(10,35,72,.48);color:#B8CBE2;border-radius:0 8px 8px 0}
+.markdown-body code{background:rgba(5,17,38,.8);color:var(--gold2);padding:.16em .42em;border:1px solid rgba(176,141,87,.16);border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,Consolas,monospace}
+.markdown-body pre{background:rgba(5,17,38,.8);border:1px solid var(--line);border-radius:8px;padding:16px;overflow:auto}
+.markdown-body hr{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+.markdown-body table{width:100%;border-collapse:separate;border-spacing:8px;margin:16px 0}
+.markdown-body th,.markdown-body td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;border-radius:6px}
+.markdown-body th{background:rgba(22,64,112,.7);color:var(--gold2);text-align:left}
+.markdown-body td{background:rgba(10,35,72,.55)}
+markdown-accessiblity-table{display:block;overflow-x:auto}
+.bottom{display:flex;justify-content:space-between;gap:18px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.bottom a{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.4px}
+@media(max-width:760px){.page{padding:14px 12px 60px}.frame{padding:22px 16px}.topbar{font-size:10px}.markdown-body table,.markdown-body tbody,.markdown-body tr,.markdown-body td{display:block;width:100%!important}.markdown-body table{border-spacing:0}.markdown-body th{display:none}}
+</style></head><body>
+<div id="bgPattern"></div><div id="grain"></div>
+<div class="page">
+  <div class="topbar"><a class="back" href="../index.html">← 返回主页</a><div style="display:flex;gap:18px"><a href="./index.html">项目列表</a></div></div>
+  <div class="case-label">CASE STUDY · 15</div>
+  <div class="frame"><div class="markdown-body"><h1>质量风险文本分析（FMEA）</h1>
+<blockquote>
+<p>把淘宝闪购、美团外卖的 1,499 条消费者 / 商家 / 骑手投诉，整理成带身份标签和 FMEA 错误码的质量风险数据集。</p>
+</blockquote>
+<markdown-accessiblity-table><table role="table">
+<tbody><tr>
+<td><strong>项目</strong></td>
+<td>质量管理课程项目 · 小组项目（全面参与）</td>
+</tr>
+<tr>
+<td><strong>时间</strong></td>
+<td>2026 春</td>
+</tr>
+<tr>
+<td><strong>方向</strong></td>
+<td>文本分类 / 质量风险 / FMEA</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td><code class="notranslate">Text Classification</code> <code class="notranslate">FMEA</code> <code class="notranslate">Data Annotation</code> <code class="notranslate">Quality Risk</code></td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<h2>背景 / Context</h2>
+<p>平台型服务的质量问题分散在消费者、商家和骑手三端。同一条投诉，从不同角色看可能是不同的问题：消费者关心退款和体验，商家关心平台规则和结算，骑手关心派单和扣款。</p>
+<p>项目把非结构化的投诉文本，变成可分角色查看、可对应失效模式的结构化数据，为质量风险识别和后续改进提供基础。</p>
+<h2>数据 / Data</h2>
+<ul>
+<li>来源：淘宝闪购、美团外卖的公开投诉/反馈文本。</li>
+<li>规模：<strong>1,499 条</strong>。</li>
+<li>六个分组：淘宝 × 消费者 / 商家 / 骑手；美团 × 消费者 / 商家 / 骑手。</li>
+<li>字段：<code class="notranslate">content</code>（投诉原文）、<code class="notranslate">identity_label</code>（角色）、<code class="notranslate">error_code</code>（FMEA 错误码）、<code class="notranslate">mapping_reason</code>（映射理由）。</li>
+</ul>
+<p><a target="_blank" rel="noopener noreferrer" href="../assets/quality-overview.png"><img src="../assets/quality-overview.png" alt="投诉分布与 FMEA 错误码" style="max-width: 100%;"></a></p>
+<h2>我的工作 / What I did</h2>
+<ul>
+<li>清洗投诉文本，去掉重复、无效和过短内容。</li>
+<li>按消费者 / 商家 / 骑手三种身份分类。</li>
+<li>将投诉映射到 FMEA 错误码，并记录映射理由，保证结果可复核。</li>
+<li>按平台和角色整理成 6 个结构化 CSV，统计各错误码的出现频次。</li>
+<li>输出可用于质量风险排序和后续改进的清单。</li>
+</ul>
+<h2>结果 / Results</h2>
+<ul>
+<li>形成 <strong>1,499 条</strong>、6 个分组的质量风险数据集。</li>
+<li>骑手端的 <code class="notranslate">Q1</code>（扣款/结算类）出现最多，共 <strong>601 条</strong>；消费者端的 <code class="notranslate">X1</code>、<code class="notranslate">X3</code> 分别为 <strong>248</strong>、<strong>203</strong> 条；商家端的 <code class="notranslate">S2</code> 为 <strong>75</strong> 条。</li>
+<li>数据可以直接按平台、角色、错误码筛选，用于定位高频质量问题。</li>
+</ul>
+<h2>关键数据 / Key Numbers</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>分组</th>
+<th align="right">记录数</th>
+<th>主要错误码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>淘宝 · 消费者</td>
+<td align="right">251</td>
+<td>X1 / X3</td>
+</tr>
+<tr>
+<td>淘宝 · 商家</td>
+<td align="right">60</td>
+<td>S2 / S3</td>
+</tr>
+<tr>
+<td>淘宝 · 骑手</td>
+<td align="right">360</td>
+<td>Q1 / Q2 / Q4</td>
+</tr>
+<tr>
+<td>美团 · 消费者</td>
+<td align="right">387</td>
+<td>X1 / X3</td>
+</tr>
+<tr>
+<td>美团 · 商家</td>
+<td align="right">68</td>
+<td>S2 / S3</td>
+</tr>
+<tr>
+<td>美团 · 骑手</td>
+<td align="right">373</td>
+<td>Q1 / Q2 / Q4</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td align="right"><strong>1,499</strong></td>
+<td>10 类 FMEA 错误码</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><a target="_blank" rel="noopener noreferrer" href="../assets/case-15-quality.png"><img src="../assets/case-15-quality.png" alt="角色 × FMEA 错误码" style="max-width: 100%;"></a></p>
+<p><sub>图：6 个平台/角色分组 × 10 类 FMEA 错误码的频次热力图；右侧为总频次最高的错误码。</sub></p>
+<h2>结论 / Takeaways</h2>
+<ul>
+<li><strong>Q1 扣款/结算类是最大风险池</strong>：601 条，主要集中在骑手端；这比“整体满意度低”更能指导改进。</li>
+<li><strong>不同角色的高频问题不同</strong>：消费者端 X1/X3（体验、活动），商家端 S2（平台规则/退款），骑手端 Q1（扣款/结算）。</li>
+<li><strong>FMEA 让文本变成可排序的风险清单</strong>：每条投诉都有身份标签、错误码和映射理由，后续可以按角色和风险等级处理。</li>
+</ul>
+<h2>边界 / Limitations</h2>
+<ul>
+<li>错误码映射包含人工判断，存在一定主观性。</li>
+<li>投诉文本只代表愿意发声的用户，不能代表全部用户体验。</li>
+<li>项目重点是结构化与分类，不是因果推断；不能直接说某个错误码导致了多少损失。</li>
+</ul>
+<h2>这个项目说明了什么 / What it shows</h2>
+<ul>
+<li><strong>文本结构化</strong>：把非结构化投诉变成可分析的数据。</li>
+<li><strong>质量工具</strong>：用 FMEA 的失效模式思路组织问题，而不是只做情感分析。</li>
+<li><strong>可复核性</strong>：每条映射都保留理由，方便别人检查和修正。</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>说明</strong>：案例页只展示聚合统计，不包含原始投诉文本和个人信息。</p>
+</blockquote></div></div>
+  <div class="bottom"><a href="../index.html">← 返回项目列表</a><a href="../index.html">AARON ZHANG / HOME</a></div>
+</div>
+</body></html>

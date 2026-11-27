@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C2C56"><title>供应商门户数据自动化 · Aaron Zhang</title>
+<style>
+:root{
+  --bg:#0C2C56; --gold:#B08D57; --gold2:#D6C08A; --ivory:#F5F7FA; --steel:#9FB8D6;
+  --line:rgba(176,141,87,.24);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+a,a:visited{color:var(--gold2);text-decoration:none}
+a:hover{color:#F1DFC0}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0C2C56;color:#DCE8F2;font-family:var(--sans);line-height:1.75;overflow-x:hidden;font-size:16px}
+body::before{content:"";position:fixed;inset:0;z-index:-4;background:
+ radial-gradient(circle at 84% 8%,rgba(56,112,156,.34),transparent 40%),
+ radial-gradient(circle at 12% 18%,rgba(30,88,132,.34),transparent 38%),
+ radial-gradient(circle at 20% 76%,rgba(176,141,87,.08),transparent 34%),
+ linear-gradient(135deg,#092447 0%,#0C2C56 34%,#123F74 62%,#0B2A52 100%)}
+#bgPattern{position:fixed;inset:-8%;z-index:-3;pointer-events:none;background:url("../assets/bg-analytics.svg") center/1600px 1200px repeat;opacity:.95;animation:drift 80s linear infinite alternate}
+@keyframes drift{from{background-position:0 0}to{background-position:120px 80px}}
+#grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.32;background:url("../assets/grain.png");background-size:160px 160px;mix-blend-mode:soft-light}
+.page{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:26px 28px 80px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:8px 2px 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.back{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.5px;border-bottom:1px solid rgba(176,141,87,.35);padding-bottom:2px}
+.back:hover{color:#F1DFC0;border-color:var(--gold2)}
+.frame{position:relative;border:1px solid rgba(176,141,87,.32);border-radius:18px;padding:34px 38px;background:linear-gradient(180deg,rgba(10,35,72,.72),rgba(8,27,56,.58));box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.frame::before,.frame::after{content:"";position:absolute;width:30px;height:30px;pointer-events:none}
+.frame::before{top:10px;left:10px;border-top:1px solid rgba(176,141,87,.75);border-left:1px solid rgba(176,141,87,.75)}
+.frame::after{bottom:10px;right:10px;border-bottom:1px solid rgba(176,141,87,.75);border-right:1px solid rgba(176,141,87,.75)}
+.case-label{color:var(--gold);font:600 10px/1 var(--sans);letter-spacing:3px;margin-bottom:20px}
+.markdown-body h1,.markdown-body h2,.markdown-body h3{font-family:var(--serif);color:var(--ivory);font-weight:500;line-height:1.25}
+.markdown-body h1{font-size:clamp(34px,4.5vw,54px);margin:0 0 20px;padding-bottom:18px;border-bottom:1px solid var(--line);position:relative}
+.markdown-body h1::after{content:"";position:absolute;left:0;bottom:-1px;width:100px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.markdown-body h2{font-size:28px;margin:42px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(176,141,87,.16)}
+.markdown-body h3{font-size:21px;color:var(--gold2);margin:28px 0 12px}
+.markdown-body p{margin:0 0 16px;color:#CFDCEB}
+.markdown-body strong{color:var(--ivory)}
+.markdown-body em{color:var(--gold2);font-style:italic}
+.markdown-body a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(176,141,87,.30)}
+.markdown-body a:hover{color:#F1DFC0;border-color:var(--gold2)}
+.markdown-body img{max-width:100%;height:auto;border:1px solid rgba(176,141,87,.28);border-radius:10px;margin:10px 0;background:rgba(6,21,46,.4)}
+.markdown-body ul,.markdown-body ol{padding-left:1.3em}
+.markdown-body li{margin:.35em 0}
+.markdown-body blockquote{margin:22px 0;padding:14px 18px;border-left:2px solid var(--gold);background:rgba(10,35,72,.48);color:#B8CBE2;border-radius:0 8px 8px 0}
+.markdown-body code{background:rgba(5,17,38,.8);color:var(--gold2);padding:.16em .42em;border:1px solid rgba(176,141,87,.16);border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,Consolas,monospace}
+.markdown-body pre{background:rgba(5,17,38,.8);border:1px solid var(--line);border-radius:8px;padding:16px;overflow:auto}
+.markdown-body hr{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+.markdown-body table{width:100%;border-collapse:separate;border-spacing:8px;margin:16px 0}
+.markdown-body th,.markdown-body td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;border-radius:6px}
+.markdown-body th{background:rgba(22,64,112,.7);color:var(--gold2);text-align:left}
+.markdown-body td{background:rgba(10,35,72,.55)}
+markdown-accessiblity-table{display:block;overflow-x:auto}
+.bottom{display:flex;justify-content:space-between;gap:18px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.bottom a{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.4px}
+@media(max-width:760px){.page{padding:14px 12px 60px}.frame{padding:22px 16px}.topbar{font-size:10px}.markdown-body table,.markdown-body tbody,.markdown-body tr,.markdown-body td{display:block;width:100%!important}.markdown-body table{border-spacing:0}.markdown-body th{display:none}}
+</style></head><body>
+<div id="bgPattern"></div><div id="grain"></div>
+<div class="page">
+  <div class="topbar"><a class="back" href="../index.html">← 返回主页</a><div style="display:flex;gap:18px"><a href="./index.html">项目列表</a></div></div>
+  <div class="case-label">CASE STUDY · 01</div>
+  <div class="frame"><div class="markdown-body"><h1>供应商门户数据自动化</h1>
+<blockquote>
+<p>把天津、沈阳两座工厂的供应商订单，从每天人工整理变成标准化排产数据，直接进入 SAP 录入流程。</p>
+</blockquote>
+<markdown-accessiblity-table><table role="table">
+<tbody><tr>
+<td><strong>公司</strong></td>
+<td>本特勒投资（中国）有限公司</td>
+</tr>
+<tr>
+<td><strong>时间</strong></td>
+<td>2026.07 – 至今</td>
+</tr>
+<tr>
+<td><strong>角色</strong></td>
+<td>供应链数字化实习生 · 独立开发</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td><code class="notranslate">Python</code> <code class="notranslate">浏览器自动化</code> <code class="notranslate">数据清洗</code> <code class="notranslate">Excel / SAP</code></td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<h2>背景 / Context</h2>
+<p>天津、沈阳两座工厂的供应商订单需要人工从供应商门户逐条整理。订单覆盖小米、宝马等整车厂客户，涉及 <strong>50+ 零件号</strong>，还要按零件号、功能、日期、紧急程度等多个维度清洗、汇总，最后整理成可以录入 SAP 的标准化排产数据。</p>
+<p>原来的流程高度依赖人工：每天重复打开页面、复制字段、核对格式、拼接表格。单是小米订单，每天就要花 <strong>20–40 分钟</strong>；宝马订单约 <strong>15 分钟/天</strong>。数据分散、口径不统一，也容易出现漏项和格式错误。</p>
+<h2>我的工作 / What I did</h2>
+<p>我独立开发了一套供应商门户数据抓取工作流，把「取数 → 清洗 → 汇总 → 输出」串成一条可重复执行的流程：</p>
+<ol>
+<li><strong>拆字段</strong>：和业务使用方确认 SAP 录入所需的字段、顺序、格式和必填规则。</li>
+<li><strong>自动取数</strong>：从供应商门户抓取订单数据，减少逐条复制。</li>
+<li><strong>多维清洗</strong>：按零件号、功能、日期、紧急程度去重、归并、校验。</li>
+<li><strong>标准化输出</strong>：生成可直接用于排产的表格，对齐 SAP 录入格式。</li>
+<li><strong>异常兜底</strong>：对缺失字段、格式异常、重复记录做标记，保留人工复核入口。</li>
+</ol>
+<h2>结果 / Impact</h2>
+<ul>
+<li>小米订单整理耗时：<strong>20–40 分钟/天 → 1 分钟</strong></li>
+<li>宝马订单整理耗时：<strong>15 分钟/天 → 1 分钟</strong></li>
+<li>以自动化流程<strong>完全替代人工整理环节</strong>，把时间从重复搬运转回异常处理和业务沟通。</li>
+</ul>
+<h2>关键数据 / Key Numbers</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+<th>口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>客户 / 零件号</td>
+<td>50+ 零件号</td>
+<td>小米、宝马等整车厂客户</td>
+</tr>
+<tr>
+<td>覆盖工厂</td>
+<td>2 座</td>
+<td>天津、沈阳</td>
+</tr>
+<tr>
+<td>小米订单整理</td>
+<td>20–40 分钟/天 → 1 分钟</td>
+<td>原人工流程 vs 自动化后</td>
+</tr>
+<tr>
+<td>宝马订单整理</td>
+<td>15 分钟/天 → 1 分钟</td>
+<td>原人工流程 vs 自动化后</td>
+</tr>
+<tr>
+<td>异常处理</td>
+<td>人工复核</td>
+<td>缺失字段、重复记录、格式异常</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><a target="_blank" rel="noopener noreferrer" href="../assets/case-01-supplier.png"><img src="../assets/case-01-supplier.png" alt="供应商订单自动化前后" style="max-width: 100%;"></a></p>
+<p><sub>图：从门户取数、清洗、标准化输出到异常复核的流程；右侧为两座工厂的耗时变化口径。</sub></p>
+<h2>结论 / Takeaways</h2>
+<ul>
+<li><strong>先定义输出，再倒推输入</strong>：SAP 需要什么字段、什么顺序、什么格式，决定了抓取和清洗的规则；这比“先抓下来再说”更可靠。</li>
+<li><strong>自动化的收益来自消除重复搬运</strong>：真正省下的是复制、格式转换和逐条核对的时间，而不是让系统替人做业务判断。</li>
+<li><strong>异常必须留入口</strong>：缺失字段、重复记录、格式不一致仍然需要人工复核；自动化把人的时间从搬运转到异常处理。</li>
+</ul>
+<h2>可迁移的能力 / What it shows</h2>
+<ul>
+<li><strong>业务流程拆解</strong>：先定义输出，再倒推需要哪些字段和步骤。</li>
+<li><strong>数据质量意识</strong>：去重、校验、异常兜底，而不是「抓下来就算完成」。</li>
+<li><strong>用户视角</strong>：工具最终要给业务同事用，格式和可解释性比技术炫技更重要。</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>说明</strong>：该项目为实习期间内部项目。以上仅展示问题拆解、方法和个人贡献，不包含公司数据、系统截图或源代码；部分细节已做脱敏和概括处理。</p>
+</blockquote></div></div>
+  <div class="bottom"><a href="../index.html">← 返回项目列表</a><a href="../index.html">AARON ZHANG / HOME</a></div>
+</div>
+</body></html>

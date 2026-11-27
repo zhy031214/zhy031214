@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" fill="none">
+  <g stroke="#B08D57" stroke-opacity="0.11" fill="none">
+    <!-- top-right academy fan -->
+    <g transform="translate(1440 120)">
+      <circle r="120"/><circle r="180"/><circle r="240"/><circle r="300"/><circle r="360"/>
+      <path d="M0 0L-340 120M0 0L-300 240M0 0L-220 330M0 0L-110 380M0 0L0 400" stroke-opacity="0.06"/>
+      <path d="M-380 0H0V380" stroke-opacity="0.08"/>
+    </g>
+    <!-- bottom-left contours -->
+    <g stroke="#7FA6C9" stroke-opacity="0.09">
+      <path d="M-80 1120C120 1010 240 1080 360 980C480 880 600 1040 760 940C880 866 960 900 1040 850"/>
+      <path d="M-80 1160C120 1050 240 1120 360 1020C480 920 600 1080 760 980C880 906 960 940 1040 890"/>
+      <path d="M-80 1080C120 970 240 1040 360 940C480 840 600 1000 760 900C880 826 960 860 1040 810"/>
+      <path d="M-40 1020C160 910 280 980 400 880C520 780 640 940 800 840C920 766 1000 800 1080 750"/>
+    </g>
+    <!-- blueprint rules -->
+    <g stroke="#7FA6C9" stroke-opacity="0.06">
+      <path d="M120 60V1140M124 60V1140M1480 60V1140M1484 60V1140"/>
+      <path d="M120 90H180M120 160H160M120 230H180M120 300H160M120 370H180M120 440H160"/>
+      <path d="M1420 90H1480M1440 160H1480M1420 230H1480M1440 300H1480M1420 370H1480"/>
+    </g>
+    <!-- constellation -->
+    <g stroke="#B08D57" stroke-opacity="0.13">
+      <path d="M300 250L430 190L560 250L650 180L780 230L720 340L590 370L470 330L360 390L300 250Z"/>
+      <path d="M560 250L590 370M430 190L470 330M650 180L720 340"/>
+    </g>
+    <g fill="#B08D57" fill-opacity="0.24" stroke="none">
+      <circle cx="300" cy="250" r="2.5"/><circle cx="430" cy="190" r="2"/><circle cx="560" cy="250" r="3"/><circle cx="650" cy="180" r="2"/><circle cx="780" cy="230" r="2.5"/><circle cx="720" cy="340" r="2"/><circle cx="590" cy="370" r="3"/><circle cx="470" cy="330" r="2"/><circle cx="360" cy="390" r="2.5"/>
+    </g>
+    <!-- center compass -->
+    <g transform="translate(880 620)" stroke="#B08D57" stroke-opacity="0.08">
+      <circle r="150"/><circle r="110" stroke-dasharray="2 10"/><circle r="40"/>
+      <path d="M-190 0H190M0 -190V190"/>
+      <path d="M-106 -106L106 106M-106 106L106 -106" stroke-opacity="0.04"/>
+    </g>
+    <!-- small ticks -->
+    <g stroke="#B08D57" stroke-opacity="0.16">
+      <path d="M1000 160H1080M1000 160V210M1080 160V190"/>
+      <path d="M1060 860H1160M1060 860V900M1160 860V920"/>
+      <path d="M1320 620H1400M1320 620V650"/>
+    </g>
+  </g>
+  <!-- formulas, very quiet -->
+  <g fill="#B08D57" fill-opacity="0.13" font-family="Georgia, 'Times New Roman', serif">
+    <text x="230" y="160" font-size="40">E[Y]</text>
+    <text x="930" y="460" font-size="34">P(y | x)</text>
+    <text x="640" y="980" font-size="42">β</text>
+    <text x="1210" y="1030" font-size="38">Σ</text>
+  </g>
+  <!-- labels -->
+  <g fill="#7FA6C9" fill-opacity="0.14" font-family="Helvetica, Arial" font-size="10" letter-spacing="3">
+    <text x="290" y="430">DATA</text>
+    <text x="760" y="250">INSIGHT</text>
+    <text x="1040" y="560">DECISION</text>
+  </g>
+</svg>

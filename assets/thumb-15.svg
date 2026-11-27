@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420" fill="none" role="img" aria-label="Customs Crawler">
+<rect width="800" height="420" fill="#071A3A"/>
+<rect x="0" y="0" width="8" height="420" fill="#B08D57"/>
+<rect x="0.5" y="0.5" width="799" height="419" fill="none" stroke="#24466E"/>
+<rect x="14" y="14" width="772" height="392" fill="none" stroke="#1E3A5F"/>
+<path d="M14 30V14H30M770 14H786V30M786 390V406H770M30 406H14V390" stroke="#B08D57" stroke-opacity="0.55" stroke-width="1.2"/>
+<text x="40" y="46" fill="#8FB3D9" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="2.4">15 / OPEN SOURCE</text>
+<text x="760" y="46" text-anchor="end" fill="#8FB3D9" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10" font-weight="500" letter-spacing="2">AARON ZHANG</text>
+<g transform="translate(180,95)">
+<rect x="0" y="0" width="240" height="160" rx="4" fill="#0B2244" stroke="#24466E" transform="rotate(-5 120 80)"/>
+<rect x="20" y="10" width="240" height="160" rx="4" fill="#071A3A" stroke="#24466E"/>
+<text x="140" y="102" text-anchor="middle" fill="#F5F7FA" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="46" font-weight="400">{ }</text>
+<path d="M60 126H220" stroke="#24466E"/>
+<rect x="60" y="140" width="100" height="6" rx="3" fill="#24466E"/>
+</g>
+<text x="40" y="362" fill="#F5F7FA" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="34" font-weight="600" letter-spacing="-0.4">Customs Crawler</text>
+<text x="40" y="388" fill="#8FB3D9" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10" font-weight="500" letter-spacing="1.8">PYTHON · PLAYWRIGHT</text>
+<text x="760" y="392" text-anchor="end" fill="#1E3A5F" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="84" font-weight="500">15</text>
+</svg>

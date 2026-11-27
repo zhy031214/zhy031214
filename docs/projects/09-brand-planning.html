@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C2C56"><title>品牌策划赛 · 恩施润邦茶业 · Aaron Zhang</title>
+<style>
+:root{
+  --bg:#0C2C56; --gold:#B08D57; --gold2:#D6C08A; --ivory:#F5F7FA; --steel:#9FB8D6;
+  --line:rgba(176,141,87,.24);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+a,a:visited{color:var(--gold2);text-decoration:none}
+a:hover{color:#F1DFC0}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0C2C56;color:#DCE8F2;font-family:var(--sans);line-height:1.75;overflow-x:hidden;font-size:16px}
+body::before{content:"";position:fixed;inset:0;z-index:-4;background:
+ radial-gradient(circle at 84% 8%,rgba(56,112,156,.34),transparent 40%),
+ radial-gradient(circle at 12% 18%,rgba(30,88,132,.34),transparent 38%),
+ radial-gradient(circle at 20% 76%,rgba(176,141,87,.08),transparent 34%),
+ linear-gradient(135deg,#092447 0%,#0C2C56 34%,#123F74 62%,#0B2A52 100%)}
+#bgPattern{position:fixed;inset:-8%;z-index:-3;pointer-events:none;background:url("../assets/bg-analytics.svg") center/1600px 1200px repeat;opacity:.95;animation:drift 80s linear infinite alternate}
+@keyframes drift{from{background-position:0 0}to{background-position:120px 80px}}
+#grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.32;background:url("../assets/grain.png");background-size:160px 160px;mix-blend-mode:soft-light}
+.page{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:26px 28px 80px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:8px 2px 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.back{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.5px;border-bottom:1px solid rgba(176,141,87,.35);padding-bottom:2px}
+.back:hover{color:#F1DFC0;border-color:var(--gold2)}
+.frame{position:relative;border:1px solid rgba(176,141,87,.32);border-radius:18px;padding:34px 38px;background:linear-gradient(180deg,rgba(10,35,72,.72),rgba(8,27,56,.58));box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.frame::before,.frame::after{content:"";position:absolute;width:30px;height:30px;pointer-events:none}
+.frame::before{top:10px;left:10px;border-top:1px solid rgba(176,141,87,.75);border-left:1px solid rgba(176,141,87,.75)}
+.frame::after{bottom:10px;right:10px;border-bottom:1px solid rgba(176,141,87,.75);border-right:1px solid rgba(176,141,87,.75)}
+.case-label{color:var(--gold);font:600 10px/1 var(--sans);letter-spacing:3px;margin-bottom:20px}
+.markdown-body h1,.markdown-body h2,.markdown-body h3{font-family:var(--serif);color:var(--ivory);font-weight:500;line-height:1.25}
+.markdown-body h1{font-size:clamp(34px,4.5vw,54px);margin:0 0 20px;padding-bottom:18px;border-bottom:1px solid var(--line);position:relative}
+.markdown-body h1::after{content:"";position:absolute;left:0;bottom:-1px;width:100px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.markdown-body h2{font-size:28px;margin:42px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(176,141,87,.16)}
+.markdown-body h3{font-size:21px;color:var(--gold2);margin:28px 0 12px}
+.markdown-body p{margin:0 0 16px;color:#CFDCEB}
+.markdown-body strong{color:var(--ivory)}
+.markdown-body em{color:var(--gold2);font-style:italic}
+.markdown-body a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(176,141,87,.30)}
+.markdown-body a:hover{color:#F1DFC0;border-color:var(--gold2)}
+.markdown-body img{max-width:100%;height:auto;border:1px solid rgba(176,141,87,.28);border-radius:10px;margin:10px 0;background:rgba(6,21,46,.4)}
+.markdown-body ul,.markdown-body ol{padding-left:1.3em}
+.markdown-body li{margin:.35em 0}
+.markdown-body blockquote{margin:22px 0;padding:14px 18px;border-left:2px solid var(--gold);background:rgba(10,35,72,.48);color:#B8CBE2;border-radius:0 8px 8px 0}
+.markdown-body code{background:rgba(5,17,38,.8);color:var(--gold2);padding:.16em .42em;border:1px solid rgba(176,141,87,.16);border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,Consolas,monospace}
+.markdown-body pre{background:rgba(5,17,38,.8);border:1px solid var(--line);border-radius:8px;padding:16px;overflow:auto}
+.markdown-body hr{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+.markdown-body table{width:100%;border-collapse:separate;border-spacing:8px;margin:16px 0}
+.markdown-body th,.markdown-body td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;border-radius:6px}
+.markdown-body th{background:rgba(22,64,112,.7);color:var(--gold2);text-align:left}
+.markdown-body td{background:rgba(10,35,72,.55)}
+markdown-accessiblity-table{display:block;overflow-x:auto}
+.bottom{display:flex;justify-content:space-between;gap:18px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.bottom a{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.4px}
+@media(max-width:760px){.page{padding:14px 12px 60px}.frame{padding:22px 16px}.topbar{font-size:10px}.markdown-body table,.markdown-body tbody,.markdown-body tr,.markdown-body td{display:block;width:100%!important}.markdown-body table{border-spacing:0}.markdown-body th{display:none}}
+</style></head><body>
+<div id="bgPattern"></div><div id="grain"></div>
+<div class="page">
+  <div class="topbar"><a class="back" href="../index.html">← 返回主页</a><div style="display:flex;gap:18px"><a href="./index.html">项目列表</a></div></div>
+  <div class="case-label">CASE STUDY · 09</div>
+  <div class="frame"><div class="markdown-body"><h1>品牌策划赛 · 恩施润邦茶业</h1>
+<blockquote>
+<p>用 PEST / SWOT / 波特五力 / STP 做竞争分析，提出「硒都」品牌叙事，最终获全国一等奖，方案被企业采纳。</p>
+</blockquote>
+<markdown-accessiblity-table><table role="table">
+<tbody><tr>
+<td><strong>项目</strong></td>
+<td>全国高校商业精英挑战赛 · 品牌策划赛 · 全国一等奖</td>
+</tr>
+<tr>
+<td><strong>时间</strong></td>
+<td>2025.01 – 2025.08</td>
+</tr>
+<tr>
+<td><strong>角色</strong></td>
+<td>核心组员 · 调研 / 品牌定位 / 传播策划</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td><code class="notranslate">PEST</code> <code class="notranslate">SWOT</code> <code class="notranslate">STP</code> <code class="notranslate">品牌叙事</code></td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<h2>背景 / Context</h2>
+<p>恩施润邦茶业有不错的产地资源，但品牌辨识度不强，年轻消费者对「恩施硒茶」的认知有限。</p>
+<p>团队要回答三个问题：</p>
+<ol>
+<li>恩施茶的核心差异点是什么？</li>
+<li>应该面向谁讲这个故事？</li>
+<li>用什么内容、渠道和预算，把故事讲出去？</li>
+</ol>
+<h2>我的工作 / What I did</h2>
+<ul>
+<li><strong>实地调研</strong>：前往恩施润邦茶业，对接企业负责人，了解产品、渠道和品牌现状。</li>
+<li><strong>竞争分析</strong>：运用 PEST、SWOT、波特五力、CAMP-S 完成竞争分析与 STP 品牌定位。</li>
+<li><strong>品牌叙事</strong>：创新提出 <strong>「硒都」</strong> 品牌叙事，把产地稀缺性转成消费者能听懂的记忆点。</li>
+<li><strong>年轻化策划</strong>：策划「茶叶快闪店」「硒力青年计划」，拓展 Z 世代受众。</li>
+<li><strong>传播预算</strong>：制定 <strong>50 万元级</strong>流媒体宣传预算与 KPI 体系。</li>
+<li><strong>落地跟进</strong>：新品牌 Logo 与包装设计方案被企业实际采纳落地。</li>
+</ul>
+<h2>结果 / Impact</h2>
+<ul>
+<li><strong>全国一等奖</strong>：全国 700 余所高校、1 万余支队伍参赛。</li>
+<li>新品牌 Logo 与包装设计方案被企业实际采纳落地。</li>
+<li>把「产地优势」转成「品牌叙事 + 年轻化触点 + 可执行预算」的完整方案。</li>
+</ul>
+<h2>关键数据 / Key Numbers</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+<th>口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>竞赛成绩</td>
+<td>全国一等奖</td>
+<td>全国高校商业精英挑战赛 · 品牌策划赛</td>
+</tr>
+<tr>
+<td>参赛规模</td>
+<td>700+ 高校 / 1 万+ 队伍</td>
+<td>公开赛事口径</td>
+</tr>
+<tr>
+<td>传播预算</td>
+<td>50 万元级</td>
+<td>流媒体宣传 + KPI</td>
+</tr>
+<tr>
+<td>落地</td>
+<td>Logo / 包装方案</td>
+<td>企业实际采纳</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><a target="_blank" rel="noopener noreferrer" href="../assets/case-09-brand.png"><img src="../assets/case-09-brand.png" alt="恩施润邦品牌策划" style="max-width: 100%;"></a></p>
+<p><sub>图：从 PEST/SWOT、STP、硒都叙事、快闪/青年计划到预算与 KPI 的策略链路。</sub></p>
+<h2>结论 / Takeaways</h2>
+<ul>
+<li><strong>产地优势不会自动变成品牌</strong>：要把“恩施硒茶”翻译成消费者能记住的“硒都”叙事，才形成差异点。</li>
+<li><strong>定位之后要有触点</strong>：快闪店和“硒力青年计划”把品牌从一句口号变成可体验的内容。</li>
+<li><strong>方案要能落地</strong>：50 万级预算、KPI 和 Logo/包装落地，比只讲品牌理念更能证明策略有效。</li>
+</ul>
+<h2>可迁移的能力 / What it shows</h2>
+<ul>
+<li><strong>从调研到策略</strong>：分析框架不是套模板，最终要落到定位和行动。</li>
+<li><strong>品牌叙事</strong>：把专业术语翻译成消费者语言。</li>
+<li><strong>落地意识</strong>：方案不只停在 PPT，Logo 和包装真正被企业采用。</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>说明</strong>：该项目为学科竞赛。以上仅展示公开的比赛结果和方法，不包含企业未公开的经营数据。</p>
+</blockquote></div></div>
+  <div class="bottom"><a href="../index.html">← 返回项目列表</a><a href="../index.html">AARON ZHANG / HOME</a></div>
+</div>
+</body></html>

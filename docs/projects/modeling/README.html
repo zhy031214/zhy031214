@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C2C56"><title>Modeling Notes · Aaron Zhang</title>
+<style>
+:root{
+  --bg:#0C2C56; --gold:#B08D57; --gold2:#D6C08A; --ivory:#F5F7FA; --steel:#9FB8D6;
+  --line:rgba(176,141,87,.24);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+a,a:visited{color:var(--gold2);text-decoration:none}
+a:hover{color:#F1DFC0}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0C2C56;color:#DCE8F2;font-family:var(--sans);line-height:1.75;overflow-x:hidden;font-size:16px}
+body::before{content:"";position:fixed;inset:0;z-index:-4;background:
+ radial-gradient(circle at 84% 8%,rgba(56,112,156,.34),transparent 40%),
+ radial-gradient(circle at 12% 18%,rgba(30,88,132,.34),transparent 38%),
+ radial-gradient(circle at 20% 76%,rgba(176,141,87,.08),transparent 34%),
+ linear-gradient(135deg,#092447 0%,#0C2C56 34%,#123F74 62%,#0B2A52 100%)}
+#bgPattern{position:fixed;inset:-8%;z-index:-3;pointer-events:none;background:url("../../assets/bg-analytics.svg") center/1600px 1200px repeat;opacity:.95;animation:drift 80s linear infinite alternate}
+@keyframes drift{from{background-position:0 0}to{background-position:120px 80px}}
+#grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.32;background:url("../../assets/grain.png");background-size:160px 160px;mix-blend-mode:soft-light}
+.page{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:26px 28px 80px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:8px 2px 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.back{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.5px;border-bottom:1px solid rgba(176,141,87,.35);padding-bottom:2px}
+.back:hover{color:#F1DFC0;border-color:var(--gold2)}
+.frame{position:relative;border:1px solid rgba(176,141,87,.32);border-radius:18px;padding:34px 38px;background:linear-gradient(180deg,rgba(10,35,72,.72),rgba(8,27,56,.58));box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.frame::before,.frame::after{content:"";position:absolute;width:30px;height:30px;pointer-events:none}
+.frame::before{top:10px;left:10px;border-top:1px solid rgba(176,141,87,.75);border-left:1px solid rgba(176,141,87,.75)}
+.frame::after{bottom:10px;right:10px;border-bottom:1px solid rgba(176,141,87,.75);border-right:1px solid rgba(176,141,87,.75)}
+.case-label{color:var(--gold);font:600 10px/1 var(--sans);letter-spacing:3px;margin-bottom:20px}
+.markdown-body h1,.markdown-body h2,.markdown-body h3{font-family:var(--serif);color:var(--ivory);font-weight:500;line-height:1.25}
+.markdown-body h1{font-size:clamp(34px,4.5vw,54px);margin:0 0 20px;padding-bottom:18px;border-bottom:1px solid var(--line);position:relative}
+.markdown-body h1::after{content:"";position:absolute;left:0;bottom:-1px;width:100px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.markdown-body h2{font-size:28px;margin:42px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(176,141,87,.16)}
+.markdown-body h3{font-size:21px;color:var(--gold2);margin:28px 0 12px}
+.markdown-body p{margin:0 0 16px;color:#CFDCEB}
+.markdown-body strong{color:var(--ivory)}
+.markdown-body em{color:var(--gold2);font-style:italic}
+.markdown-body a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(176,141,87,.30)}
+.markdown-body a:hover{color:#F1DFC0;border-color:var(--gold2)}
+.markdown-body img{max-width:100%;height:auto;border:1px solid rgba(176,141,87,.28);border-radius:10px;margin:10px 0;background:rgba(6,21,46,.4)}
+.markdown-body ul,.markdown-body ol{padding-left:1.3em}
+.markdown-body li{margin:.35em 0}
+.markdown-body blockquote{margin:22px 0;padding:14px 18px;border-left:2px solid var(--gold);background:rgba(10,35,72,.48);color:#B8CBE2;border-radius:0 8px 8px 0}
+.markdown-body code{background:rgba(5,17,38,.8);color:var(--gold2);padding:.16em .42em;border:1px solid rgba(176,141,87,.16);border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,Consolas,monospace}
+.markdown-body pre{background:rgba(5,17,38,.8);border:1px solid var(--line);border-radius:8px;padding:16px;overflow:auto}
+.markdown-body hr{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+.markdown-body table{width:100%;border-collapse:separate;border-spacing:8px;margin:16px 0}
+.markdown-body th,.markdown-body td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;border-radius:6px}
+.markdown-body th{background:rgba(22,64,112,.7);color:var(--gold2);text-align:left}
+.markdown-body td{background:rgba(10,35,72,.55)}
+markdown-accessiblity-table{display:block;overflow-x:auto}
+.bottom{display:flex;justify-content:space-between;gap:18px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.bottom a{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.4px}
+@media(max-width:760px){.page{padding:14px 12px 60px}.frame{padding:22px 16px}.topbar{font-size:10px}.markdown-body table,.markdown-body tbody,.markdown-body tr,.markdown-body td{display:block;width:100%!important}.markdown-body table{border-spacing:0}.markdown-body th{display:none}}
+</style></head><body>
+<div id="bgPattern"></div><div id="grain"></div>
+<div class="page">
+  <div class="topbar"><a class="back" href="../../index.html">← 返回主页</a><div style="display:flex;gap:18px"><a href="../../index.html">项目列表</a></div></div>
+  <div class="case-label">MODELING NOTES</div>
+  <div class="frame"><div class="markdown-body"><h1>电商会话购买意图预测</h1>
+<blockquote>
+<p>用可解释机器学习和倾向得分因果分析，识别高购买概率会话，并单独估计「周末访问」的因果效应。</p>
+</blockquote>
+<p><a href="../10-purchase-intent-modeling.html">← 返回项目案例</a> · <a href="../../index.html">← 返回主页</a></p>
+<h2>核心结果</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>指标</th>
+<th align="right">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>会话数</td>
+<td align="right">12,330</td>
+</tr>
+<tr>
+<td>购买率</td>
+<td align="right">15.47%</td>
+</tr>
+<tr>
+<td>最终模型</td>
+<td align="right">RandomForest</td>
+</tr>
+<tr>
+<td>测试集 PR-AUC</td>
+<td align="right">0.7290</td>
+</tr>
+<tr>
+<td>测试集 ROC-AUC</td>
+<td align="right">0.9199</td>
+</tr>
+<tr>
+<td>阈值（训练集折外 F1 最优）</td>
+<td align="right">0.415</td>
+</tr>
+<tr>
+<td>Precision / Recall / F1</td>
+<td align="right">0.6606 / 0.6623 / 0.6614</td>
+</tr>
+<tr>
+<td>AIPW 周末效应</td>
+<td align="right">+1.59 个百分点，95% CI [+0.03%, +3.10%]</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>项目问题</h2>
+<p>电商平台每天产生大量会话。如果能在会话早期识别高购买概率访问，就可以把优惠券、客服和再营销资源投向更可能转化的人群。</p>
+<p>项目区分两个不同问题：</p>
+<ol>
+<li><strong>预测问题</strong>：根据会话特征预测 <code class="notranslate">Revenue=1</code> 的概率。</li>
+<li><strong>因果问题</strong>：在观察数据和明确识别假设下，估计周末访问相对工作日访问对购买率的平均影响。</li>
+</ol>
+<p>预测不等于因果。置换重要性和 SHAP 只解释模型；因果部分单独使用倾向得分、IPW 和 AIPW。</p>
+<h2>方法</h2>
+<ul>
+<li>数据审计：缺失、重复、类型、目标比例。</li>
+<li>EDA：月份、访客类型、工作日/周末、PageValues 等业务分组。</li>
+<li>特征工程：<code class="notranslate">TotalPages</code>、<code class="notranslate">TotalDuration</code>、<code class="notranslate">AvgSecondsPerPage</code>、<code class="notranslate">ProductPageShare</code>、<code class="notranslate">PageValueSeen</code>。</li>
+<li>预处理：<code class="notranslate">Pipeline</code> + <code class="notranslate">ColumnTransformer</code>，所有拟合只在训练折内完成。</li>
+<li>模型：逻辑回归、决策树、随机森林、HistGradientBoosting；五折分层交叉验证，以 PR-AUC 调参。</li>
+<li>阈值：用训练集折外预测选择 F1 最优阈值 0.415，避免使用测试标签。</li>
+<li>解释：置换重要性、逻辑回归系数、SHAP；明确其边界是「解释模型」，不是「证明因果」。</li>
+<li>因果：倾向得分、IPW、AIPW、SMD 平衡、200 次自助法置信区间。</li>
+<li>稳健性：移除 <code class="notranslate">PageValues</code> 后重新训练，报告性能变化。</li>
+</ul>
+<h2>目录</h2>
+<pre lang="text" class="notranslate"><code class="notranslate">modeling/
+├── code/analysis.py          # 完整分析脚本
+├── data/README.md            # 数据来源与下载方式（不直接分发原始数据）
+├── results/                  # 最终指标与因果估计
+├── requirements.txt
+└── README.md
+</code></pre>
+<h2>运行</h2>
+<div class="highlight highlight-source-shell"><pre class="notranslate">python -m venv .venv
+<span class="pl-c1">source</span> .venv/bin/activate
+pip install -r requirements.txt
+
+<span class="pl-c"><span class="pl-c">#</span> 从 UCI 下载数据，放到 data/online_shoppers_intention.csv</span>
+python code/analysis.py</pre></div>
+<p>数据下载与字段说明见 <a href="./data/README.html"><code class="notranslate">data/README.md</code></a>。</p>
+<h2>数据引用</h2>
+<p>Sakar, C. &amp; Kastro, Y. (2018). <em>Online Shoppers Purchasing Intention Dataset</em>. UCI Machine Learning Repository. DOI: <a href="https://doi.org/10.24432/C5F88Q" rel="nofollow">10.24432/C5F88Q</a>. CC BY 4.0.</p>
+<h2>说明</h2>
+<ul>
+<li>原始数据不随仓库分发，请从 UCI 下载。</li>
+<li>项目代码用于作品集展示；如果你要引用或复用，请先联系我。</li>
+<li>完整图表、报告和面试讲解材料在本地维护，案例页里有核心图表与结论。</li>
+</ul></div></div>
+  <div class="bottom"><a href="../index.html">← 返回项目列表</a><a href="../../index.html">AARON ZHANG / HOME</a></div>
+</div>
+</body></html>

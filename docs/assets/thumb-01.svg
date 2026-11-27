@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420" fill="none" role="img" aria-label="Purchase Intent">
+<rect width="800" height="420" fill="#071A3A"/>
+<rect x="0" y="0" width="8" height="420" fill="#F5F7FA"/>
+<rect x="0.5" y="0.5" width="799" height="419" fill="none" stroke="#24466E"/>
+<rect x="14" y="14" width="772" height="392" fill="none" stroke="#1E3A5F"/>
+<path d="M14 30V14H30M770 14H786V30M786 390V406H770M30 406H14V390" stroke="#B08D57" stroke-opacity="0.55" stroke-width="1.2"/>
+<text x="40" y="46" fill="#8FB3D9" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="2.4">01 / MODELING</text>
+<text x="760" y="46" text-anchor="end" fill="#8FB3D9" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10" font-weight="500" letter-spacing="2">AARON ZHANG</text>
+<g transform="translate(40,90)">
+<path d="M0 180H650M0 20V180" stroke="#24466E"/>
+<path d="M0 160L90 142L180 150L270 108L360 120L450 78L540 92L630 52" stroke="#F5F7FA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M0 160L90 142L180 150L270 108L360 120L450 78L540 92L630 52V180H0V160Z" fill="#F5F7FA" opacity="0.05"/>
+<g fill="#B08D57"><circle cx="270" cy="108" r="4"/><circle cx="540" cy="92" r="4"/></g>
+</g>
+<text x="40" y="362" fill="#F5F7FA" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="34" font-weight="600" letter-spacing="-0.4">Purchase Intent</text>
+<text x="40" y="388" fill="#8FB3D9" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10" font-weight="500" letter-spacing="1.8">PREDICTION · CAUSAL INFERENCE</text>
+<text x="760" y="392" text-anchor="end" fill="#1E3A5F" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="84" font-weight="500">01</text>
+</svg>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C2C56"><title>AI 记账与任务规划智能体 · Aaron Zhang</title>
+<style>
+:root{
+  --bg:#0C2C56; --gold:#B08D57; --gold2:#D6C08A; --ivory:#F5F7FA; --steel:#9FB8D6;
+  --line:rgba(176,141,87,.24);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+a,a:visited{color:var(--gold2);text-decoration:none}
+a:hover{color:#F1DFC0}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0C2C56;color:#DCE8F2;font-family:var(--sans);line-height:1.75;overflow-x:hidden;font-size:16px}
+body::before{content:"";position:fixed;inset:0;z-index:-4;background:
+ radial-gradient(circle at 84% 8%,rgba(56,112,156,.34),transparent 40%),
+ radial-gradient(circle at 12% 18%,rgba(30,88,132,.34),transparent 38%),
+ radial-gradient(circle at 20% 76%,rgba(176,141,87,.08),transparent 34%),
+ linear-gradient(135deg,#092447 0%,#0C2C56 34%,#123F74 62%,#0B2A52 100%)}
+#bgPattern{position:fixed;inset:-8%;z-index:-3;pointer-events:none;background:url("../assets/bg-analytics.svg") center/1600px 1200px repeat;opacity:.95;animation:drift 80s linear infinite alternate}
+@keyframes drift{from{background-position:0 0}to{background-position:120px 80px}}
+#grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.32;background:url("../assets/grain.png");background-size:160px 160px;mix-blend-mode:soft-light}
+.page{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:26px 28px 80px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:8px 2px 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.back{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.5px;border-bottom:1px solid rgba(176,141,87,.35);padding-bottom:2px}
+.back:hover{color:#F1DFC0;border-color:var(--gold2)}
+.frame{position:relative;border:1px solid rgba(176,141,87,.32);border-radius:18px;padding:34px 38px;background:linear-gradient(180deg,rgba(10,35,72,.72),rgba(8,27,56,.58));box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.frame::before,.frame::after{content:"";position:absolute;width:30px;height:30px;pointer-events:none}
+.frame::before{top:10px;left:10px;border-top:1px solid rgba(176,141,87,.75);border-left:1px solid rgba(176,141,87,.75)}
+.frame::after{bottom:10px;right:10px;border-bottom:1px solid rgba(176,141,87,.75);border-right:1px solid rgba(176,141,87,.75)}
+.case-label{color:var(--gold);font:600 10px/1 var(--sans);letter-spacing:3px;margin-bottom:20px}
+.markdown-body h1,.markdown-body h2,.markdown-body h3{font-family:var(--serif);color:var(--ivory);font-weight:500;line-height:1.25}
+.markdown-body h1{font-size:clamp(34px,4.5vw,54px);margin:0 0 20px;padding-bottom:18px;border-bottom:1px solid var(--line);position:relative}
+.markdown-body h1::after{content:"";position:absolute;left:0;bottom:-1px;width:100px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.markdown-body h2{font-size:28px;margin:42px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(176,141,87,.16)}
+.markdown-body h3{font-size:21px;color:var(--gold2);margin:28px 0 12px}
+.markdown-body p{margin:0 0 16px;color:#CFDCEB}
+.markdown-body strong{color:var(--ivory)}
+.markdown-body em{color:var(--gold2);font-style:italic}
+.markdown-body a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(176,141,87,.30)}
+.markdown-body a:hover{color:#F1DFC0;border-color:var(--gold2)}
+.markdown-body img{max-width:100%;height:auto;border:1px solid rgba(176,141,87,.28);border-radius:10px;margin:10px 0;background:rgba(6,21,46,.4)}
+.markdown-body ul,.markdown-body ol{padding-left:1.3em}
+.markdown-body li{margin:.35em 0}
+.markdown-body blockquote{margin:22px 0;padding:14px 18px;border-left:2px solid var(--gold);background:rgba(10,35,72,.48);color:#B8CBE2;border-radius:0 8px 8px 0}
+.markdown-body code{background:rgba(5,17,38,.8);color:var(--gold2);padding:.16em .42em;border:1px solid rgba(176,141,87,.16);border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,Consolas,monospace}
+.markdown-body pre{background:rgba(5,17,38,.8);border:1px solid var(--line);border-radius:8px;padding:16px;overflow:auto}
+.markdown-body hr{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+.markdown-body table{width:100%;border-collapse:separate;border-spacing:8px;margin:16px 0}
+.markdown-body th,.markdown-body td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;border-radius:6px}
+.markdown-body th{background:rgba(22,64,112,.7);color:var(--gold2);text-align:left}
+.markdown-body td{background:rgba(10,35,72,.55)}
+markdown-accessiblity-table{display:block;overflow-x:auto}
+.bottom{display:flex;justify-content:space-between;gap:18px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.bottom a{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.4px}
+@media(max-width:760px){.page{padding:14px 12px 60px}.frame{padding:22px 16px}.topbar{font-size:10px}.markdown-body table,.markdown-body tbody,.markdown-body tr,.markdown-body td{display:block;width:100%!important}.markdown-body table{border-spacing:0}.markdown-body th{display:none}}
+</style></head><body>
+<div id="bgPattern"></div><div id="grain"></div>
+<div class="page">
+  <div class="topbar"><a class="back" href="../index.html">← 返回主页</a><div style="display:flex;gap:18px"><a href="./index.html">项目列表</a></div></div>
+  <div class="case-label">CASE STUDY · 06</div>
+  <div class="frame"><div class="markdown-body"><h1>AI 记账与任务规划智能体</h1>
+<blockquote>
+<p>独立搭建一个集记账、语言风格切换、任务排程于一体的 Coze 工作流智能体，课程设计成绩 A+。</p>
+</blockquote>
+<markdown-accessiblity-table><table role="table">
+<tbody><tr>
+<td><strong>项目</strong></td>
+<td>课程设计 · 独立完成</td>
+</tr>
+<tr>
+<td><strong>时间</strong></td>
+<td>2025.11 – 2025.12</td>
+</tr>
+<tr>
+<td><strong>角色</strong></td>
+<td>独立完成 · 工作流设计 / 搭建 / 调试</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td><code class="notranslate">Coze</code> <code class="notranslate">Kimi-K2</code> <code class="notranslate">豆包 1.5 Pro</code> <code class="notranslate">多数据库记忆</code></td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<h2>背景 / Context</h2>
+<p>日常记账和任务管理通常是两个割裂的工具：记账 App 不管任务，任务工具不管消费。把两者放进一个对话式智能体，可以同时处理「今天花了什么」和「今天要做什么」。</p>
+<p>但 LLM 做个人助理有两个典型问题：</p>
+<ul>
+<li><strong>记不住</strong>：多轮对话后忘记之前的账目和任务。</li>
+<li><strong>会瞎编</strong>：没有可靠的数据存储时，模型容易编造金额或待办。</li>
+</ul>
+<h2>我的工作 / What I did</h2>
+<p>我基于 <strong>Coze 平台</strong>（Kimi-K2、豆包 1.5 Pro）独立搭建了一个复杂工作流智能体：</p>
+<ol>
+<li><strong>记账</strong>：识别用户的消费描述，抽取金额、类别、时间、备注，写入账目。</li>
+<li><strong>任务排程</strong>：识别待办事项，支持按时间 / 优先级整理任务。</li>
+<li><strong>语言风格切换</strong>：同一件事可以用不同语气表达，测试模型的角色一致性。</li>
+<li><strong>多重数据库记忆</strong>：用多个数据库分别存储账目、任务、偏好，减少上下文遗忘。</li>
+<li><strong>降低幻觉</strong>：让模型基于数据库查询结果回答，而不是凭记忆生成。</li>
+<li><strong>全流程调试</strong>：从意图识别、槽位抽取到数据库读写，逐段测试和迭代。</li>
+</ol>
+<h2>结果 / Impact</h2>
+<ul>
+<li>完成一个可运行的复杂工作流智能体，课程设计成绩 <strong>A+</strong>。</li>
+<li>把「记账 + 任务 + 风格切换」三个能力放进同一个对话入口。</li>
+<li>通过多数据库记忆和查询式回答，降低模型幻觉。</li>
+</ul>
+<h2>关键数据 / Key Numbers</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+<th>口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>课程成绩</td>
+<td>A+</td>
+<td>课程设计</td>
+</tr>
+<tr>
+<td>核心能力</td>
+<td>3 类</td>
+<td>记账 / 任务排程 / 风格切换</td>
+</tr>
+<tr>
+<td>记忆结构</td>
+<td>多数据库</td>
+<td>账目 / 任务 / 偏好</td>
+</tr>
+<tr>
+<td>模型</td>
+<td>Kimi-K2、豆包 1.5 Pro</td>
+<td>Coze 工作流</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><a target="_blank" rel="noopener noreferrer" href="../assets/case-06-bookkeeping.png"><img src="../assets/case-06-bookkeeping.png" alt="AI 记账工作流" style="max-width: 100%;"></a></p>
+<p><sub>图：用户输入、意图识别、槽位抽取、多库记忆与查询式回复的工作流。</sub></p>
+<h2>结论 / Takeaways</h2>
+<ul>
+<li><strong>复杂任务要拆成可测试的节点</strong>：意图识别、槽位抽取、数据库读写、回复生成，每一段都可以单独调试。</li>
+<li><strong>记忆是助理产品的核心</strong>：没有可靠的账目/任务存储，模型就会“看起来会”，但实际记不住、答不准。</li>
+<li><strong>查询式回答降低幻觉</strong>：先查数据库再生成，比让模型凭上下文回忆更可靠。</li>
+</ul>
+<h2>可迁移的能力 / What it shows</h2>
+<ul>
+<li><strong>工作流拆解</strong>：把复杂任务拆成意图识别、槽位抽取、数据读写、回复生成。</li>
+<li><strong>AI 产品思维</strong>：记忆、可靠性、风格一致性，决定助理「好不好用」。</li>
+<li><strong>独立交付</strong>：从设计、搭建到调试，一个人把原型跑通。</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>说明</strong>：该项目为课程设计。以上仅展示方案思路和个人贡献，不包含账号信息或完整提示词。</p>
+</blockquote></div></div>
+  <div class="bottom"><a href="../index.html">← 返回项目列表</a><a href="../index.html">AARON ZHANG / HOME</a></div>
+</div>
+</body></html>

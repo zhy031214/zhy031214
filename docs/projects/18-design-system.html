@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C2C56"><title>Design System · 个人主页视觉系统 · Aaron Zhang</title>
+<style>
+:root{
+  --bg:#0C2C56; --gold:#B08D57; --gold2:#D6C08A; --ivory:#F5F7FA; --steel:#9FB8D6;
+  --line:rgba(176,141,87,.24);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+a,a:visited{color:var(--gold2);text-decoration:none}
+a:hover{color:#F1DFC0}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0C2C56;color:#DCE8F2;font-family:var(--sans);line-height:1.75;overflow-x:hidden;font-size:16px}
+body::before{content:"";position:fixed;inset:0;z-index:-4;background:
+ radial-gradient(circle at 84% 8%,rgba(56,112,156,.34),transparent 40%),
+ radial-gradient(circle at 12% 18%,rgba(30,88,132,.34),transparent 38%),
+ radial-gradient(circle at 20% 76%,rgba(176,141,87,.08),transparent 34%),
+ linear-gradient(135deg,#092447 0%,#0C2C56 34%,#123F74 62%,#0B2A52 100%)}
+#bgPattern{position:fixed;inset:-8%;z-index:-3;pointer-events:none;background:url("../assets/bg-analytics.svg") center/1600px 1200px repeat;opacity:.95;animation:drift 80s linear infinite alternate}
+@keyframes drift{from{background-position:0 0}to{background-position:120px 80px}}
+#grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.32;background:url("../assets/grain.png");background-size:160px 160px;mix-blend-mode:soft-light}
+.page{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:26px 28px 80px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:8px 2px 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.back{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.5px;border-bottom:1px solid rgba(176,141,87,.35);padding-bottom:2px}
+.back:hover{color:#F1DFC0;border-color:var(--gold2)}
+.frame{position:relative;border:1px solid rgba(176,141,87,.32);border-radius:18px;padding:34px 38px;background:linear-gradient(180deg,rgba(10,35,72,.72),rgba(8,27,56,.58));box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.frame::before,.frame::after{content:"";position:absolute;width:30px;height:30px;pointer-events:none}
+.frame::before{top:10px;left:10px;border-top:1px solid rgba(176,141,87,.75);border-left:1px solid rgba(176,141,87,.75)}
+.frame::after{bottom:10px;right:10px;border-bottom:1px solid rgba(176,141,87,.75);border-right:1px solid rgba(176,141,87,.75)}
+.case-label{color:var(--gold);font:600 10px/1 var(--sans);letter-spacing:3px;margin-bottom:20px}
+.markdown-body h1,.markdown-body h2,.markdown-body h3{font-family:var(--serif);color:var(--ivory);font-weight:500;line-height:1.25}
+.markdown-body h1{font-size:clamp(34px,4.5vw,54px);margin:0 0 20px;padding-bottom:18px;border-bottom:1px solid var(--line);position:relative}
+.markdown-body h1::after{content:"";position:absolute;left:0;bottom:-1px;width:100px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.markdown-body h2{font-size:28px;margin:42px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(176,141,87,.16)}
+.markdown-body h3{font-size:21px;color:var(--gold2);margin:28px 0 12px}
+.markdown-body p{margin:0 0 16px;color:#CFDCEB}
+.markdown-body strong{color:var(--ivory)}
+.markdown-body em{color:var(--gold2);font-style:italic}
+.markdown-body a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(176,141,87,.30)}
+.markdown-body a:hover{color:#F1DFC0;border-color:var(--gold2)}
+.markdown-body img{max-width:100%;height:auto;border:1px solid rgba(176,141,87,.28);border-radius:10px;margin:10px 0;background:rgba(6,21,46,.4)}
+.markdown-body ul,.markdown-body ol{padding-left:1.3em}
+.markdown-body li{margin:.35em 0}
+.markdown-body blockquote{margin:22px 0;padding:14px 18px;border-left:2px solid var(--gold);background:rgba(10,35,72,.48);color:#B8CBE2;border-radius:0 8px 8px 0}
+.markdown-body code{background:rgba(5,17,38,.8);color:var(--gold2);padding:.16em .42em;border:1px solid rgba(176,141,87,.16);border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,Consolas,monospace}
+.markdown-body pre{background:rgba(5,17,38,.8);border:1px solid var(--line);border-radius:8px;padding:16px;overflow:auto}
+.markdown-body hr{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+.markdown-body table{width:100%;border-collapse:separate;border-spacing:8px;margin:16px 0}
+.markdown-body th,.markdown-body td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;border-radius:6px}
+.markdown-body th{background:rgba(22,64,112,.7);color:var(--gold2);text-align:left}
+.markdown-body td{background:rgba(10,35,72,.55)}
+markdown-accessiblity-table{display:block;overflow-x:auto}
+.bottom{display:flex;justify-content:space-between;gap:18px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.bottom a{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.4px}
+@media(max-width:760px){.page{padding:14px 12px 60px}.frame{padding:22px 16px}.topbar{font-size:10px}.markdown-body table,.markdown-body tbody,.markdown-body tr,.markdown-body td{display:block;width:100%!important}.markdown-body table{border-spacing:0}.markdown-body th{display:none}}
+</style></head><body>
+<div id="bgPattern"></div><div id="grain"></div>
+<div class="page">
+  <div class="topbar"><a class="back" href="../index.html">← 返回主页</a><div style="display:flex;gap:18px"><a href="./index.html">项目列表</a></div></div>
+  <div class="case-label">CASE STUDY · 18</div>
+  <div class="frame"><div class="markdown-body"><h1>Design System · 个人主页视觉系统</h1>
+<blockquote>
+<p>把 18 个项目放进同一套视觉规则里：颜色、字体、网格、卡片、缩略图、内容层级，以及一套我和 AI 协作的工作流。</p>
+</blockquote>
+<markdown-accessiblity-table><table role="table">
+<tbody><tr>
+<td><strong>项目</strong></td>
+<td>Self-initiated · 个人主页设计系统</td>
+</tr>
+<tr>
+<td><strong>时间</strong></td>
+<td>2026.11</td>
+</tr>
+<tr>
+<td><strong>方向</strong></td>
+<td>Design System / AI Collaboration / Front-end</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td><code class="notranslate">Design Tokens</code> <code class="notranslate">Typography</code> <code class="notranslate">Grid</code> <code class="notranslate">SVG</code> <code class="notranslate">AI Workflow</code></td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<p><a target="_blank" rel="noopener noreferrer" href="../assets/thumb-18.svg"><img src="../assets/thumb-18.svg" alt="Design System" style="max-width: 100%;"></a></p>
+<h2>背景 / Context</h2>
+<p>主页要同时容纳 18 个项目，项目类型从计量论文、优化模型到网站和 AI Agent。如果每个项目都用不同的封面、颜色和排版，页面会很快失去秩序。</p>
+<p>目标不是“做得更花”，而是建立一套能持续扩展的规则：新项目加进来时，不需要重新设计一遍，也能看起来属于同一个系统。</p>
+<h2>设计系统 / What I built</h2>
+<h3>1. Tokens</h3>
+<ul>
+<li>颜色：冷白 <code class="notranslate">#FFFFFF<span class="ml-1 d-inline-block border circle color-border-subtle" style="background-color: #FFFFFF; height: 8px; width: 8px;"></span></code> / <code class="notranslate">#F8FAFC<span class="ml-1 d-inline-block border circle color-border-subtle" style="background-color: #F8FAFC; height: 8px; width: 8px;"></span></code>，海军蓝 <code class="notranslate">#0B2545<span class="ml-1 d-inline-block border circle color-border-subtle" style="background-color: #0B2545; height: 8px; width: 8px;"></span></code>，钢蓝 <code class="notranslate">#3E6B89<span class="ml-1 d-inline-block border circle color-border-subtle" style="background-color: #3E6B89; height: 8px; width: 8px;"></span></code>，灰蓝 <code class="notranslate">#627D98<span class="ml-1 d-inline-block border circle color-border-subtle" style="background-color: #627D98; height: 8px; width: 8px;"></span></code>，金色 <code class="notranslate">#B08D57<span class="ml-1 d-inline-block border circle color-border-subtle" style="background-color: #B08D57; height: 8px; width: 8px;"></span></code>，浅灰 <code class="notranslate">#E6EDF3<span class="ml-1 d-inline-block border circle color-border-subtle" style="background-color: #E6EDF3; height: 8px; width: 8px;"></span></code>。</li>
+<li>字体：Helvetica Neue / Inter 体系；标题、正文、标签、数字四级。</li>
+<li>间距：8px 基准；卡片内边距、分区间距、表格留白统一。</li>
+<li>网格：桌面 3 列项目卡；移动端自动收为单列/双列。</li>
+</ul>
+<h3>2. Components</h3>
+<ul>
+<li>项目卡：缩略图 + 中文标题 + 类型/时间 + 一句结果 + 链接。</li>
+<li>缩略图：统一 800×420 画布、左侧 8px 色条、右上角署名、底部英文项目名和大编号。</li>
+<li>分区标题、引用块、表格、链接样式统一。</li>
+<li>18 张缩略图全部用同一套 SVG 模板生成，只替换主题、图形和标题。</li>
+</ul>
+<h3>3. Content hierarchy</h3>
+<ul>
+<li>首页只保留 About、Projects、Experience、Toolkit、Contact 五块。</li>
+<li>所有项目同尺寸、同结构，不设“主项目/次要项目”。</li>
+<li>案例页统一用「背景 → 我的工作 → 结果 → 边界」结构。</li>
+</ul>
+<h2>AI 协作 / How AI fits in</h2>
+<p>这套系统不是“让 AI 一键生成一个网页”，而是一个明确的人机分工：</p>
+<ol>
+<li><strong>我定义问题</strong>：主页要呈现什么、给谁看、哪些项目必须并列、什么语气。</li>
+<li><strong>AI 生成候选</strong>：配色、版式、SVG 缩略图、文案草稿、组件变体。</li>
+<li><strong>我筛选和收敛</strong>：决定哪些保留、哪些删掉，统一层级和品牌感。</li>
+<li><strong>AI 执行重复工作</strong>：批量生成 18 张 SVG、检查 XML、生成预览截图。</li>
+<li><strong>我做 QA</strong>：检查链接、移动端、内容准确性、隐私边界。</li>
+</ol>
+<p>AI 在这里是<strong>协作工具</strong>，不是替代判断。设计系统真正的价值，是让每次新增项目都不破坏整体。</p>
+<h2>结果 / Results</h2>
+<ul>
+<li>18 个项目全部使用同一套卡片和缩略图规则。</li>
+<li>页面从“一个大卡片 + 一个重点区”改成 3 列并列索引，信息密度更高，也更公平。</li>
+<li>新增项目只需要：一个 SVG 缩略图 + 一张卡片 + 一个案例页。</li>
+<li>同一套 tokens 可以继续用到简历、作品集 PDF 或个人网站。</li>
+</ul>
+<h2>关键数据 / Key Numbers</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+<th>口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>项目</td>
+<td>18 个</td>
+<td>同尺寸、同结构</td>
+</tr>
+<tr>
+<td>网格</td>
+<td>3 列</td>
+<td>桌面；移动端单列</td>
+</tr>
+<tr>
+<td>间距</td>
+<td>8px 基准</td>
+<td>卡片、分区、表格统一</td>
+</tr>
+<tr>
+<td>字体层级</td>
+<td>4 级</td>
+<td>标题 / 正文 / 标签 / 数字</td>
+</tr>
+<tr>
+<td>协作</td>
+<td>AI + 人</td>
+<td>生成候选 / 筛选 / QA</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><a target="_blank" rel="noopener noreferrer" href="../assets/case-18-system.png"><img src="../assets/case-18-system.png" alt="设计系统规则" style="max-width: 100%;"></a></p>
+<p><sub>图：tokens、组件、网格、AI 生成与人工 QA 的设计系统链路。</sub></p>
+<h2>结论 / Takeaways</h2>
+<ul>
+<li><strong>设计系统的价值是扩展性</strong>：新增项目只需要一张缩略图、一张卡片、一个案例页，不破坏整体秩序。</li>
+<li><strong>AI 负责候选和重复劳动</strong>：批量生成 SVG、检查 XML、生成预览；人负责判断、收敛、链接和隐私边界。</li>
+<li><strong>规则比单页美化重要</strong>：颜色、字体、间距、网格和内容层级统一，18 个差异很大的项目才能并列。</li>
+</ul>
+<h2>这个项目说明了什么 / What it shows</h2>
+<ul>
+<li><strong>设计系统思维</strong>：不是单页美化，而是 tokens、组件、规则和扩展方式。</li>
+<li><strong>AI 协作能力</strong>：知道让 AI 做什么、自己保留哪些判断。</li>
+<li><strong>前端实现</strong>：SVG、响应式布局、GitHub Markdown 限制下的排版。</li>
+<li><strong>编辑判断</strong>：在大量项目里做取舍，保持页面可读。</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>说明</strong>：这是个人主页的设计系统，不是客户项目；页面本身就是它的应用案例。</p>
+</blockquote></div></div>
+  <div class="bottom"><a href="../index.html">← 返回项目列表</a><a href="../index.html">AARON ZHANG / HOME</a></div>
+</div>
+</body></html>

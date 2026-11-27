@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C2C56"><title>正大杯 · DeepSeek 智能化普惠调研 · Aaron Zhang</title>
+<style>
+:root{
+  --bg:#0C2C56; --gold:#B08D57; --gold2:#D6C08A; --ivory:#F5F7FA; --steel:#9FB8D6;
+  --line:rgba(176,141,87,.24);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+a,a:visited{color:var(--gold2);text-decoration:none}
+a:hover{color:#F1DFC0}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0C2C56;color:#DCE8F2;font-family:var(--sans);line-height:1.75;overflow-x:hidden;font-size:16px}
+body::before{content:"";position:fixed;inset:0;z-index:-4;background:
+ radial-gradient(circle at 84% 8%,rgba(56,112,156,.34),transparent 40%),
+ radial-gradient(circle at 12% 18%,rgba(30,88,132,.34),transparent 38%),
+ radial-gradient(circle at 20% 76%,rgba(176,141,87,.08),transparent 34%),
+ linear-gradient(135deg,#092447 0%,#0C2C56 34%,#123F74 62%,#0B2A52 100%)}
+#bgPattern{position:fixed;inset:-8%;z-index:-3;pointer-events:none;background:url("../assets/bg-analytics.svg") center/1600px 1200px repeat;opacity:.95;animation:drift 80s linear infinite alternate}
+@keyframes drift{from{background-position:0 0}to{background-position:120px 80px}}
+#grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.32;background:url("../assets/grain.png");background-size:160px 160px;mix-blend-mode:soft-light}
+.page{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:26px 28px 80px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:8px 2px 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.back{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.5px;border-bottom:1px solid rgba(176,141,87,.35);padding-bottom:2px}
+.back:hover{color:#F1DFC0;border-color:var(--gold2)}
+.frame{position:relative;border:1px solid rgba(176,141,87,.32);border-radius:18px;padding:34px 38px;background:linear-gradient(180deg,rgba(10,35,72,.72),rgba(8,27,56,.58));box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.frame::before,.frame::after{content:"";position:absolute;width:30px;height:30px;pointer-events:none}
+.frame::before{top:10px;left:10px;border-top:1px solid rgba(176,141,87,.75);border-left:1px solid rgba(176,141,87,.75)}
+.frame::after{bottom:10px;right:10px;border-bottom:1px solid rgba(176,141,87,.75);border-right:1px solid rgba(176,141,87,.75)}
+.case-label{color:var(--gold);font:600 10px/1 var(--sans);letter-spacing:3px;margin-bottom:20px}
+.markdown-body h1,.markdown-body h2,.markdown-body h3{font-family:var(--serif);color:var(--ivory);font-weight:500;line-height:1.25}
+.markdown-body h1{font-size:clamp(34px,4.5vw,54px);margin:0 0 20px;padding-bottom:18px;border-bottom:1px solid var(--line);position:relative}
+.markdown-body h1::after{content:"";position:absolute;left:0;bottom:-1px;width:100px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.markdown-body h2{font-size:28px;margin:42px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(176,141,87,.16)}
+.markdown-body h3{font-size:21px;color:var(--gold2);margin:28px 0 12px}
+.markdown-body p{margin:0 0 16px;color:#CFDCEB}
+.markdown-body strong{color:var(--ivory)}
+.markdown-body em{color:var(--gold2);font-style:italic}
+.markdown-body a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(176,141,87,.30)}
+.markdown-body a:hover{color:#F1DFC0;border-color:var(--gold2)}
+.markdown-body img{max-width:100%;height:auto;border:1px solid rgba(176,141,87,.28);border-radius:10px;margin:10px 0;background:rgba(6,21,46,.4)}
+.markdown-body ul,.markdown-body ol{padding-left:1.3em}
+.markdown-body li{margin:.35em 0}
+.markdown-body blockquote{margin:22px 0;padding:14px 18px;border-left:2px solid var(--gold);background:rgba(10,35,72,.48);color:#B8CBE2;border-radius:0 8px 8px 0}
+.markdown-body code{background:rgba(5,17,38,.8);color:var(--gold2);padding:.16em .42em;border:1px solid rgba(176,141,87,.16);border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,Consolas,monospace}
+.markdown-body pre{background:rgba(5,17,38,.8);border:1px solid var(--line);border-radius:8px;padding:16px;overflow:auto}
+.markdown-body hr{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+.markdown-body table{width:100%;border-collapse:separate;border-spacing:8px;margin:16px 0}
+.markdown-body th,.markdown-body td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;border-radius:6px}
+.markdown-body th{background:rgba(22,64,112,.7);color:var(--gold2);text-align:left}
+.markdown-body td{background:rgba(10,35,72,.55)}
+markdown-accessiblity-table{display:block;overflow-x:auto}
+.bottom{display:flex;justify-content:space-between;gap:18px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.bottom a{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.4px}
+@media(max-width:760px){.page{padding:14px 12px 60px}.frame{padding:22px 16px}.topbar{font-size:10px}.markdown-body table,.markdown-body tbody,.markdown-body tr,.markdown-body td{display:block;width:100%!important}.markdown-body table{border-spacing:0}.markdown-body th{display:none}}
+</style></head><body>
+<div id="bgPattern"></div><div id="grain"></div>
+<div class="page">
+  <div class="topbar"><a class="back" href="../index.html">← 返回主页</a><div style="display:flex;gap:18px"><a href="./index.html">项目列表</a></div></div>
+  <div class="case-label">CASE STUDY · 08</div>
+  <div class="frame"><div class="markdown-body"><h1>正大杯 · DeepSeek 智能化普惠调研</h1>
+<blockquote>
+<p>462 份有效问卷、9 位深度访谈、Python 爬虫 / NLP、RFM、随机森林、有序 Logistic、LSTM 情感分析，从政府、企业、用户三个层面研究 DeepSeek 的智能化普惠。</p>
+</blockquote>
+<markdown-accessiblity-table><table role="table">
+<tbody><tr>
+<td><strong>项目</strong></td>
+<td>第十五届「正大杯」全国大学生市场调查与分析大赛 · 全国三等奖</td>
+</tr>
+<tr>
+<td><strong>时间</strong></td>
+<td>2024.12 – 2025.06</td>
+</tr>
+<tr>
+<td><strong>角色</strong></td>
+<td>核心组员 · 全程参与研究设计、数据采集、建模与报告撰写</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td><code class="notranslate">Python</code> <code class="notranslate">Nvivo</code> <code class="notranslate">RFM</code> <code class="notranslate">RandomForest</code> <code class="notranslate">Ordered Logistic</code> <code class="notranslate">LSTM</code></td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<h2>研究问题 / Research Question</h2>
+<p>研究主题是「AI 崛起效应下 DeepSeek 智能化普惠」。核心问题不是「DeepSeek 好不好用」，而是：</p>
+<ul>
+<li><strong>政府端</strong>：DeepSeek 接入政务后，是否真的带来服务、成本和知识层面的普惠？</li>
+<li><strong>企业端</strong>：前 200 强企业如何接入？行业分布和资本市场表现有什么变化？</li>
+<li><strong>用户端</strong>：哪些因素影响使用、偏好、体验和付费意愿？</li>
+<li>技术崛起如何真正转化为社会福祉？</li>
+</ul>
+<h2>研究设计 / Design</h2>
+<p>采用「定性聚焦 → 定量验证 → 综合施策」的递进框架，线上与线下结合：</p>
+<ul>
+<li><strong>线上</strong>：文献综述、Python 爬虫（小红书 / 微博）、线上访谈、LSTM 情感分析。</li>
+<li><strong>线下</strong>：街采、预调查、正式调查、补充调查。</li>
+<li><strong>抽样</strong>：上海 16 区，分层抽样 + 实地拦截；预调查和正式调查均做信度 / 效度检验。</li>
+<li><strong>样本</strong>：9 位深度访谈对象；回收 <strong>462 份有效问卷</strong>。</li>
+</ul>
+<h2>数据与质量控制 / Data</h2>
+<ul>
+<li>深度访谈覆盖算法专家、消费者等不同背景，用 Nvivo 做质性编码。</li>
+<li>爬取小红书、微博的 DeepSeek 相关内容，做清洗、去噪、词频和情感分析。</li>
+<li>问卷覆盖使用行为、偏好、体验感知、支付意愿四个模块。</li>
+<li>预调查与正式调查分别做 <strong>Cronbach's α</strong> 和 <strong>KMO / Bartlett</strong> 检验，保证量表信度与结构效度。</li>
+<li>上海 16 区按人口和区域特征做分层抽样，减少样本偏置。</li>
+</ul>
+<h2>模型 / Models</h2>
+<h3>1. 用户分层：RFM + 随机森林</h3>
+<p>用 RFM 聚类把用户分成不同价值/活跃度群体，再用随机森林识别影响用户分层的关键因素，并针对学生、技术人员、管理人员、自由职业者分别给出运营建议。</p>
+<h3>2. 偏好识别：有序 Logistic</h3>
+<p>把 11 个偏好因素归为三个维度：性能、用户体验、服务支持与技术。因变量是用户愿意付费的等级（0–4）。</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>变量</th>
+<th align="right">OR</th>
+<th>95% CI</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>性能</td>
+<td align="right"><strong>1.62</strong></td>
+<td>[1.32, 1.98]</td>
+<td>性能每提升 1 单位，更高付费等级的概率显著增加</td>
+</tr>
+<tr>
+<td>用户体验</td>
+<td align="right">0.80</td>
+<td>—</td>
+<td>呈负向，可能与期望过高、隐私顾虑、非线性关系有关</td>
+</tr>
+<tr>
+<td>服务支持与技术</td>
+<td align="right">1.08</td>
+<td>[0.91, 1.29]</td>
+<td>不显著，未直接转化为付费意愿</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<blockquote>
+<p>模型 McFadden R² 较低（约 0.004），因此更适合解读为「关联」而不是强预测；Brant 检验与 VIF 用于检查比例优势假设和共线性。</p>
+</blockquote>
+<h3>3. 体验感知：LSTM + 词云</h3>
+<p>用 LSTM 对微博 / 小红书文本做情感分类，再分词频和词云：</p>
+<ul>
+<li>正面情感集中在技术创新、智能化服务、对新手友好。</li>
+<li>负面情感集中在技术复杂性、不稳定性、学术场景下的操作困难。</li>
+</ul>
+<h3>4. 支付意愿</h3>
+<ul>
+<li>受访者的付费额度主要集中在 <strong>(0, 50] 元</strong> 区间；500 元以上的技术人员占比很低。</li>
+<li>在按月订阅假设下，约 <strong>50%</strong> 愿意支付 30 元以上/月，约 <strong>30%</strong> 愿意支付 50 元以上/月。</li>
+<li>对国产 AI 的支持度约为 <strong>75:25</strong>，但「愿意支持」到「愿意支付溢价」之间有明显衰减。</li>
+<li>高收入人群的溢价支付意愿更高；支持国产、常用国产 AI 的用户支付意愿更高。</li>
+</ul>
+<h2>关键图表 / Evidence</h2>
+<p><a target="_blank" rel="noopener noreferrer" href="../assets/case-08-or.png"><img src="../assets/case-08-or.png" alt="付费意愿的有序 Logistic 优势比" style="max-width: 100%;"></a></p>
+<p><sub>图：性能维度 OR=1.62（95% CI [1.32, 1.98]）；用户体验 OR=0.80（仅点估计）；服务支持 OR=1.08（CI [0.91, 1.29]，不显著）。</sub></p>
+<p><a target="_blank" rel="noopener noreferrer" href="../assets/case-08-framework.png"><img src="../assets/case-08-framework.png" alt="政府 / 企业 / 用户三端研究框架" style="max-width: 100%;"></a></p>
+<p><sub>图：三端证据链——政府报道与政策、前 200 强企业接入与股价、462 份用户问卷与 9 位访谈。</sub></p>
+<h2>三端发现 / Findings</h2>
+<h3>政府端</h3>
+<p>DeepSeek 在政务领域体现三类普惠价值：</p>
+<ul>
+<li><strong>服务普惠</strong>：提升办事效率和回应速度。</li>
+<li><strong>成本普惠</strong>：降低部署和调用成本。</li>
+<li><strong>知识普惠</strong>：让政策和公共服务信息更易被理解。</li>
+</ul>
+<h3>企业端</h3>
+<ul>
+<li>前 200 强企业接入呈现 <strong>头部效应、行业分化、长尾潜力</strong>。</li>
+<li>接入 DeepSeek 后，企业股价整体有正向反应，但行业间差异明显。</li>
+<li>不同行业的主营业务接入方式不同，不能用一个模板复制。</li>
+</ul>
+<h3>用户端</h3>
+<ul>
+<li>形成「社交媒体主力引流 + 新闻媒体权威扩散 + 亲友口碑信任增强」的复合传播模式。</li>
+<li>性能是付费升级的核心因素，用户体验的影响更复杂，服务支持需要转化成可感知的价值。</li>
+<li>前期质性/文本分析中，<strong>流式输出、需求理解力、响应速度</strong> 是用户反复提到的关注点。</li>
+</ul>
+<h2>战略建议 / Recommendations</h2>
+<ol>
+<li><strong>轻量化模块协同</strong>：面向县域/中小城市算力有限场景，提供低参数版本、模块化部署和「AI 即服务」订阅。</li>
+<li><strong>定制化生态扩张</strong>：头部企业共建行业级 AI 底座，中小企业用轻量工具包，激活长尾市场。</li>
+<li><strong>差异化服务支持</strong>：把技术支持、隐私安全、个性化能力转成用户能感知的价值，而不是只堆功能。</li>
+</ol>
+<h2>成果 / Impact</h2>
+<ul>
+<li><strong>全国三等奖</strong>：995 所高校、28 万+ 人报名，省赛超 1 万支队伍。</li>
+<li>形成 60 页研究报告、答辩 PPT、问卷与数据附录。</li>
+<li>把政府报道、企业数据、用户问卷三条线汇成一套完整的三端分析，而不是只做消费者问卷。</li>
+<li>个人贡献：全程参与研究设计、访谈与质性分析、爬虫/文本处理、问卷数据清洗、建模和报告撰写。</li>
+</ul>
+<h2>结论 / Takeaways</h2>
+<ul>
+<li><strong>性能是付费升级的核心因素</strong>：OR=1.62，95% CI [1.32, 1.98]；用户体验 OR=0.80，方向为负；服务支持 OR=1.08，不显著——“功能多”不等于“愿意付费”。</li>
+<li><strong>三端证据互相印证</strong>：政府端看到服务/成本/知识普惠，企业端看到头部效应、行业分化和长尾潜力，用户端看到“社交引流 + 新闻权威 + 亲友口碑”的传播结构。</li>
+<li><strong>支付意愿存在“支持但不溢价”的断层</strong>：约 75:25 支持国产 AI，但付费额度主要集中在 (0, 50] 元；约 50% 愿意 30 元以上/月，约 30% 愿意 50 元以上/月。</li>
+<li><strong>策略要分层</strong>：轻量化模块协同、定制化生态扩张、差异化服务支持，分别对应县域/中小企业、头部企业和用户感知价值。</li>
+</ul>
+<h2>边界 / Limitations</h2>
+<ul>
+<li>样本主要来自上海，外部效度有限。</li>
+<li>支付意愿是自报告，和真实付费行为可能有差距。</li>
+<li>有序 Logistic 的解释力有限，结论应表述为关联而非因果。</li>
+<li>企业股价受市场、行业、宏观因素影响，不能全部归因于接入 DeepSeek。</li>
+<li>质性编码和 FMEA/文本分类包含人工判断，存在主观性。</li>
+</ul>
+<h2>这个项目说明了什么 / What it shows</h2>
+<ul>
+<li><strong>混合研究方法</strong>：访谈 + 爬虫 + 问卷 + 统计建模 + 情感分析。</li>
+<li><strong>三端视角</strong>：政府、企业、用户，而不是只看消费者。</li>
+<li><strong>模型边界</strong>：知道 R² 低、自报告偏差、股价归因风险，并主动写清楚。</li>
+<li><strong>研究与表达</strong>：把复杂结论压缩成可汇报、可落地的建议。</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>说明</strong>：案例页只展示研究方法和公开结论，不包含原始问卷、访谈录音或未公开数据。</p>
+</blockquote></div></div>
+  <div class="bottom"><a href="../index.html">← 返回项目列表</a><a href="../index.html">AARON ZHANG / HOME</a></div>
+</div>
+</body></html>

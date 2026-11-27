@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C2C56"><title>项目案例索引 · Aaron Zhang</title>
+<style>
+:root{
+  --bg:#0C2C56; --gold:#B08D57; --gold2:#D6C08A; --ivory:#F5F7FA; --steel:#9FB8D6;
+  --line:rgba(176,141,87,.24);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+a,a:visited{color:var(--gold2);text-decoration:none}
+a:hover{color:#F1DFC0}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0C2C56;color:#DCE8F2;font-family:var(--sans);line-height:1.75;overflow-x:hidden;font-size:16px}
+body::before{content:"";position:fixed;inset:0;z-index:-4;background:
+ radial-gradient(circle at 84% 8%,rgba(56,112,156,.34),transparent 40%),
+ radial-gradient(circle at 12% 18%,rgba(30,88,132,.34),transparent 38%),
+ radial-gradient(circle at 20% 76%,rgba(176,141,87,.08),transparent 34%),
+ linear-gradient(135deg,#092447 0%,#0C2C56 34%,#123F74 62%,#0B2A52 100%)}
+#bgPattern{position:fixed;inset:-8%;z-index:-3;pointer-events:none;background:url("../assets/bg-analytics.svg") center/1600px 1200px repeat;opacity:.95;animation:drift 80s linear infinite alternate}
+@keyframes drift{from{background-position:0 0}to{background-position:120px 80px}}
+#grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.32;background:url("../assets/grain.png");background-size:160px 160px;mix-blend-mode:soft-light}
+.page{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:26px 28px 80px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:8px 2px 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.back{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.5px;border-bottom:1px solid rgba(176,141,87,.35);padding-bottom:2px}
+.back:hover{color:#F1DFC0;border-color:var(--gold2)}
+.frame{position:relative;border:1px solid rgba(176,141,87,.32);border-radius:18px;padding:34px 38px;background:linear-gradient(180deg,rgba(10,35,72,.72),rgba(8,27,56,.58));box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.frame::before,.frame::after{content:"";position:absolute;width:30px;height:30px;pointer-events:none}
+.frame::before{top:10px;left:10px;border-top:1px solid rgba(176,141,87,.75);border-left:1px solid rgba(176,141,87,.75)}
+.frame::after{bottom:10px;right:10px;border-bottom:1px solid rgba(176,141,87,.75);border-right:1px solid rgba(176,141,87,.75)}
+.case-label{color:var(--gold);font:600 10px/1 var(--sans);letter-spacing:3px;margin-bottom:20px}
+.markdown-body h1,.markdown-body h2,.markdown-body h3{font-family:var(--serif);color:var(--ivory);font-weight:500;line-height:1.25}
+.markdown-body h1{font-size:clamp(34px,4.5vw,54px);margin:0 0 20px;padding-bottom:18px;border-bottom:1px solid var(--line);position:relative}
+.markdown-body h1::after{content:"";position:absolute;left:0;bottom:-1px;width:100px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.markdown-body h2{font-size:28px;margin:42px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(176,141,87,.16)}
+.markdown-body h3{font-size:21px;color:var(--gold2);margin:28px 0 12px}
+.markdown-body p{margin:0 0 16px;color:#CFDCEB}
+.markdown-body strong{color:var(--ivory)}
+.markdown-body em{color:var(--gold2);font-style:italic}
+.markdown-body a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(176,141,87,.30)}
+.markdown-body a:hover{color:#F1DFC0;border-color:var(--gold2)}
+.markdown-body img{max-width:100%;height:auto;border:1px solid rgba(176,141,87,.28);border-radius:10px;margin:10px 0;background:rgba(6,21,46,.4)}
+.markdown-body ul,.markdown-body ol{padding-left:1.3em}
+.markdown-body li{margin:.35em 0}
+.markdown-body blockquote{margin:22px 0;padding:14px 18px;border-left:2px solid var(--gold);background:rgba(10,35,72,.48);color:#B8CBE2;border-radius:0 8px 8px 0}
+.markdown-body code{background:rgba(5,17,38,.8);color:var(--gold2);padding:.16em .42em;border:1px solid rgba(176,141,87,.16);border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,Consolas,monospace}
+.markdown-body pre{background:rgba(5,17,38,.8);border:1px solid var(--line);border-radius:8px;padding:16px;overflow:auto}
+.markdown-body hr{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+.markdown-body table{width:100%;border-collapse:separate;border-spacing:8px;margin:16px 0}
+.markdown-body th,.markdown-body td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;border-radius:6px}
+.markdown-body th{background:rgba(22,64,112,.7);color:var(--gold2);text-align:left}
+.markdown-body td{background:rgba(10,35,72,.55)}
+markdown-accessiblity-table{display:block;overflow-x:auto}
+.bottom{display:flex;justify-content:space-between;gap:18px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.bottom a{color:var(--gold2);text-decoration:none;font-size:12px;letter-spacing:1.4px}
+@media(max-width:760px){.page{padding:14px 12px 60px}.frame{padding:22px 16px}.topbar{font-size:10px}.markdown-body table,.markdown-body tbody,.markdown-body tr,.markdown-body td{display:block;width:100%!important}.markdown-body table{border-spacing:0}.markdown-body th{display:none}}
+</style></head><body>
+<div id="bgPattern"></div><div id="grain"></div>
+<div class="page">
+  <div class="topbar"><a class="back" href="../index.html">← 返回主页</a><div style="display:flex;gap:18px"></div></div>
+  <div class="case-label">CASE INDEX</div>
+  <div class="frame"><div class="markdown-body"><h1>项目案例索引 / Project Case Studies</h1>
+<blockquote>
+<p>这些案例来自实习、课程、竞赛和开源项目。内部项目只展示问题拆解、方法和个人贡献，不包含公司数据、系统截图或源代码。</p>
+</blockquote>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>项目</th>
+<th>类型</th>
+<th>一句话结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="./10-purchase-intent-modeling.html">电商购买意图建模</a></td>
+<td>建模 / 因果</td>
+<td>PR-AUC 0.729；AIPW 周末效应 +1.59pp</td>
+</tr>
+<tr>
+<td><a href="./14-two-child-policy.html">全面二孩政策复现</a></td>
+<td>计量</td>
+<td>CFPS/CHFS + PSM-DID，课程复现作业</td>
+</tr>
+<tr>
+<td><a href="./13-bike-dispatch.html">哈啰单车调度优化</a></td>
+<td>优化</td>
+<td>整数规划 + OR-Tools，4 个需求点 / 3 辆车</td>
+</tr>
+<tr>
+<td><a href="./15-quality-fmea.html">质量风险文本分析</a></td>
+<td>质量</td>
+<td>1,499 条投诉，6 个群体，FMEA 映射</td>
+</tr>
+<tr>
+<td><a href="./08-deepseek-research.html">正大杯 · DeepSeek 市场调研</a></td>
+<td>研究 / 数据</td>
+<td>462 份问卷；RFM + 随机森林 + 有序 Logistic</td>
+</tr>
+<tr>
+<td><a href="./01-supplier-automation.html">供应商门户数据自动化</a></td>
+<td>数据自动化</td>
+<td>订单整理 20–40 分钟/天 → 1 分钟</td>
+</tr>
+<tr>
+<td><a href="./02-sales-monitoring.html">车型销量监测与客户份额分析</a></td>
+<td>数据分析</td>
+<td>103 品牌 / 738 车系 / 2000 万+ 终端销量</td>
+</tr>
+<tr>
+<td><a href="./03-policy-parser.html">政策文本智能解析</a></td>
+<td>信息结构化</td>
+<td>累计解析 300+ 条，团队持续使用</td>
+</tr>
+<tr>
+<td><a href="./04-production-dashboard.html">生产数据看板与 BOM 治理</a></td>
+<td>系统 / 看板</td>
+<td>SQL 看板落地，10 款产品 BOM 口径统一</td>
+</tr>
+<tr>
+<td><a href="./05-ai-invoice-agent.html">发票风险识别智能体</a></td>
+<td>AI Agent</td>
+<td>立项，完成 OCR + 多模态识别原型</td>
+</tr>
+<tr>
+<td><a href="./06-ai-bookkeeping-agent.html">AI 记账与任务规划智能体</a></td>
+<td>AI Agent</td>
+<td>独立完成，课程设计 A+</td>
+</tr>
+<tr>
+<td><a href="./07-pwc-asset-dashboard.html">普华永道资产盘点可视化</a></td>
+<td>系统 / 看板</td>
+<td>2 个月 600 台电脑，覆盖 8 个部门</td>
+</tr>
+<tr>
+<td><a href="./11-fragrance-website.html">Fragrance Roaming · 香水网站</a></td>
+<td>网站</td>
+<td>100+ 用户、2,700 浏览，课程 A+ 第一</td>
+</tr>
+<tr>
+<td><a href="./12-epidemic-modeling.html">疫情传播模型拟合</a></td>
+<td>建模</td>
+<td>AnyLogic SEIR，19 个参数，课程 A+ 第一</td>
+</tr>
+<tr>
+<td><a href="./09-brand-planning.html">品牌策划赛 · 恩施润邦茶业</a></td>
+<td>研究 / 策划</td>
+<td>全国一等奖，方案被企业采纳</td>
+</tr>
+<tr>
+<td><a href="./17-bookshare.html">BookShare 书籍分享站</a></td>
+<td>网站</td>
+<td>React/TS/Tailwind，5 个页面</td>
+</tr>
+<tr>
+<td><a href="./18-design-system.html">Design System · 个人主页视觉系统</a></td>
+<td>设计系统</td>
+<td>Tokens、18 张缩略图、3 列网格、AI 协作流程</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>每个案例的结构</h2>
+<ol>
+<li><strong>背景 / Context</strong> — 业务问题是什么，为什么值得做。</li>
+<li><strong>我的工作 / What I did</strong> — 我具体做了什么，边界在哪里。</li>
+<li><strong>结果 / Impact</strong> — 用时间、覆盖率、采用率等指标说明变化。</li>
+<li><strong>边界 / Limits</strong> — 哪些结论不能证明，哪些数据不能公开。</li>
+<li><strong>这个项目说明了什么 / What it shows</strong> — 这段经历能说明什么能力。</li>
+</ol>
+<h2>说明</h2>
+<ul>
+<li>内部项目已做脱敏和概括处理，不包含公司数据、客户信息、系统截图或源代码。</li>
+<li>竞赛 / 课程项目仅展示公开结果和方法，不包含未公开的原始数据。</li>
+<li>电商购买意图项目的代码与结果在 <a href="./modeling/"><code class="notranslate">modeling/</code></a> 下，原始数据请从 UCI 下载。</li>
+</ul></div></div>
+  <div class="bottom"><a href="../index.html">← 返回项目列表</a><a href="../index.html">AARON ZHANG / HOME</a></div>
+</div>
+</body></html>
